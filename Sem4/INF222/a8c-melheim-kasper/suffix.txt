@@ -1,0 +1,89 @@
+Assignment 8 - INF222
+
+8.3 TASK: Integer intrinsics
+
+1. 
+Java: Has signed and unsigned variables. Unsigned only takes postive numbers.
+Pascal: The compiler checks if its signed/unsigned for you.
+Python: Does not have default unsigned variables, but they can be computed in.
+
+2. 
+Java: The name of it is Int. It ranges from −2,147,483,648 all the way to 2,147,483,647
+Pascal: The name of it is Integer. It ranges from -2,147,483,648 to 2,147,483,647
+Python: The name of it is Integer. The range of it is not fixed like in pascal and java, its the computers memory that decides how big of a number it can calculate.
+
+3. Based on the mathematical problem 12 − 3 − 5 + −2 < −7 ∗ −11 % 8:
+
+Python: Parentheses has the highest precedence. After that the exponentials follow. These are not in our example above. 
+In the example above multiplication and modulus comes first. Then the addition and subtraction follows. Finally the comparison operator < is executed.
+
+Java and Pascal: the precedence is implementation based. This means that there are no rules for the precendece in the standard, this is set by the code afterwards itself.
+
+4.
+Python: Found nothing.
+Java: Two first properties are mentioned, the remaining are not.
+Pascal: None of the properties are mentioned, but others ate.
+
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+8.4 Bonus TASK: Reals
+
+1.
+Java: Yes, Float and Double.
+Python: Float
+Pascal: Real-type from the standard, 
+
+2.
+
+Java: Float, range: 3.40282347 * 10^(38) to 1.40239846 * 10^(-45) and Double, range: 1.7976931348623157 x 10^(308), 4.9406564584124654 x 10^(-324)
+Python: Float, range: Computers memory that decides how big of a number it can calculate.
+Pascal: Real-type from the standard, range: no range.
+
+3.
+Yes, Java, Python and Pascal have reals that are IEEE 754 compliant.
+
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+8.5 TASK: Arrays
+
+1. No
+
+2. No
+
+Java has object pointers, but thats about it.
+
+
+8.6 TASK: Basic language versus standard libraries
+
+1.
+Java: Yes
+Pascal: No
+Python: Yes
+
+2.
+Standard library is not a single document but a collection of multiple files.
+
+Python: Packages with tons of modules. When the compiler or interpretet is installed, the standard library follows. CPython is default, and there are multiple libraries.
+Java: Packages with containing classes.
+Both python and java have large standard libraries.
+
+3.
+It is specified on the last page of every documentation. 
+Java: 789 pages (Java SE 15)
+Python: Too many to count
+Pascal: 92 pages.
+
+4.
+Java: Cant count.
+Python: 2220
+Pascal: Cant count.
+
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+8.7 TASK: Standards’ audience
+
+1. Standards are made and written to avoid future problems and disagreement between developers and users regarding lagnuage specifications. It is filled to the brim, down to the
+smallest details on how and what the language does, and when. Its a very specific set of paragraphs explaining the fundamental core elements of the language, meant for everyone that
+wants to use the language, and understand it fully. The standard has a lot of theoretic words, and is not a easy read for most people.
+
+2. An easier read of the documents would be having it on a webpage, cleanly organized with pages for each subject, and search bar for fast access.

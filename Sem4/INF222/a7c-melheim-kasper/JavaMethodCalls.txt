@@ -1,0 +1,14 @@
+1. 
+
+In java we cannot use a swap methods because of the "pass by value" when it comes to primitive varibles in java. 
+This is because the arguments used are evaluated to values, boxes are initialized to the value of the arguments,
+and boxes are created for paramter variables. Swapping in Java does work, but one can not do it in a method.
+
+2.
+We can change it because of pointers. Pointers in java works on reference types, also known as objects. Primitives are always pass by value, and this differs from
+objects that are accessed by reference.
+
+This method receives a c og type "C". Inside of the method the integer field x that is listed inside the class C is set to 42.
+public static void m ( C c ) {
+    c . x = 42;
+}
