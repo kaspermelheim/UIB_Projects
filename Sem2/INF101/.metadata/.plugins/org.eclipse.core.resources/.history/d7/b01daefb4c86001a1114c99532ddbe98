@@ -1,0 +1,168 @@
+[Semesteroppgave 2: Fire på rad og Tripp-trapp-tresko]
+
+•Levert av:
+kme020
+
+•[X] hele semesteroppgaven er ferdig og klar til retting!
+•Sjekkliste:
+•[X] Kjørbart Fire på Rad-spill* [X] Funksjonelt spill* [X] Fungerende user interface* [X] Støtter AI 
+•[X] Kjørbart Tripp-trapp-tresko-spill* [X] Funksjonelt spill* [X] Fungerende user interface* [X] Støtter AI 
+•[X] Forklart designvalg, hvordan koden er organisert, abstraksjon, og andre ting 
+•[X] Tester
+•[X] Dokumentasjon (JavaDoc, kommentarer, diagrammer, README, etc.)
+•[X] Fornuftige navn på klasser, interfaces, metoder og variabler
+•[X] Fornuftige abstraksjoner og innkapsling (bruk av klasser, interface, metoder, etc.)
+
+-Oversikt
+
+(oversikt over koden din og det du har gjort)
+
+Denne README noten består av all informasjonen rundt spillene jeg har laget, testing, bruk, design,
+funksjonalitet osv. Jeg har valgt å ha alle komentarene mine inne i selve koden på engelsk,
+som er god skikk når det kommer til alle applikasjoner man skal lage, da flere personer fra ulike
+land kanskje kanskje vil bruke/jobbe med koden.
+
+Hele applikasjonen er tekstbasert og foregår i konsollen, utover dette er det ikke noe ekstra GUI,
+eller mer fancy presentasjoner av oppgaven. Jeg har valgt å ikke bruke eksempelkoden som allerede
+var gitt. Dette fordi jeg ønsket å lage alt selv fra bunnen av, ut fra egen evne, og fra det
+jeg selv har lært så langt i faget.
+
+Spillene fungerer ved hjelp av klassene TicTacToe, Connect4, Game og GUIMain. Bruker interface IGame. 
+Prøvde å inkludere IBoard og Board men møtte på en del bugs forklart lenger nede.
+
+
+
+-Bruk
+
+For å starte programmet kjør: GUIMain.java
+
+Du blir spørt om du vil spille singleplayer (alene mot CPU) eller multiplayer (du mot en annen).
+Skriv inn 1 for singleplayer eller 2 for multiplayer, og press "Enter".
+Blir så bedt om å skrive inn navn man ønsker å bruke i spillet, og en velkomstmelding vil så
+bli sendt ut. Programmet spør så om du vil spille TicTacToe eller Connect Four. 
+Skriv inn 1 for TicTacToe eller 2 for Connect Four.
+
+Dersom du har sendt inn 1:
+TicTacToe:
+Velkomstmelding spesifikt for spillet blir sendt ut (hvordan spille).
+Det blir printet ut 3x3 brett, der celle øverst i venstre hjørne har posisjon 1, den rett til
+høyre for 1 har posisjon 2.... nederst i høyre hjørne har pos 9. 
+Du skriver inn tall fra 1-9 alt etter hvor du vil plassere brikke. Dersom noen får 3 på rad
+vil spillet stoppe og gi ut en melding om hvem som vant. Spillet stopper også dersom antall 
+trekk == width*height (9 for TicTacToe) (om alle posisjoner har blitt tatt). Den vil da gi ut 
+en melding om at det er uavgjort.
+
+Dersom du har sendt inn 2:
+Connect Four:
+Velkomstmelding spesifikt for spillet blir sendt ut (hvordan spille).
+Det blir printet ut et 8x8 brett der kolonnen helt til venstre har nr. 0, kolonnen helt til
+høgre har nr. 7. Du skriver inn tall fra 0-7 alt etter hvilken kolonne du vil slippe brikken
+i. Dersom noen får 4 på rad vil spillet stoppe og gi ut en melding om hvem som vant. Spillet
+stopper også dersom antall trekk == width*height (64 for Connect Four) (om alle posisjonen er
+tatt). Den vil da gi ut en melding om at spillet er uavgjort.
+
+
+-Designvalg
+
+Jeg har valgt å ha GUI i GUIMain. Når denne blir kjørt vil bruker bli spørt om han vil
+spille singleplayer eller multiplayer. Videre vil han få valg om å spille TicTacToe eller
+Connect4. Dette er laget ved if løkker som sjekker hva input Scanner får, og opretter nye 
+spillobjekt alt etter. 
+
+I både TicTacToe og Connect Four blir selve brettet opprettet og oppdatert med en createBoard()
+metode. Denne tar inn int[][] board, og bruker 2 for løker for å lage et todimensjonalt brett,
+med størrelse width x height (lager brett ut i fra hva høyde og bredde spillet har satt).
+
+Begge spillklassene har runMultiplayer og runSingleplayer. Disse to er veldig like, 
+bortsett fra at i runSingleplayer operer player2 med et random valgt tall (CPU). Metodene
+er bygd opp av if løkker inni while løkker. While løkkene fortsetter å gå helt til noe
+stopper spillet, så brukerene kan fortsette å plassere brikker.
+Metodene sørger for at hver spiller får gjort hvert sitt trekk med place(), men må
+først sjekke med canPlace() og isFull() at det er lovlig. Sjekker hele tiden om noen
+har vunnet med checkVictory().
+
+Place() og checkVictory() er veldig forskjellige i begge spillklassene, og dette er et bevisst valg
+jeg skal forklare. I TicTacToe er det veldig få plasseringsmuligheter og conditions for seier.
+Har derfor valgt å vise bruk av case (siden det kun er 9 celler bruker kan velge mellom, og
+ikke er så vanskelig å hardkode). Place() i TTT har utfall for hver input fra 1-9, og plasserer
+brukerobjektet på valgt celle. I Connect Four har jeg brukt for og if løkker til å gå gjennom
+alle cellene, og plasserer brukerobjekt på kolonnen som ble sendt inn til metoden.
+
+Begge disse metodene sender kjører så checkVictory for å se om noen vant med det siste trekket.
+CheckVictory i TTT bruker metoden getVictoryConditions(), som returnerer en liste med alle 
+mulige kombinasjoner man kan ha for å vinne. checkVictory sjekker så om listene med trekkene
+til player1 og player2 inneholder noen av de conditionsene som er i listen fra getVictoryConditions().
+Dersom ja betyr det at noen har vunnet, og funksjonen returnerer true.
+
+checkVictory() i Connect4 har en mer generisk løsning med while og if som går gjennom alle mulige
+seierkombinasjonerer, og bruker en count variabel til å sjekke om noen har fått fire på rad.
+ 
+
+-Bruk av abstraksjon
+
+(hvordan du har valgt objekter/klasser for å representere ting i spillet)
+
+GUIMain representer alle spørringer og GUI relatert som sendes ut til bruker før selve spillet begynner.
+Game holder på all kode som er felles for begge spillene.
+TicTacToe og Connect4 inneholder kode som er spesifikt for spillene. 
+Det blir oprettet nye spillklasser alt etter hva spill bruker vil spille.
+
+-Erfaring – hvilke valg viste seg å være gode / dårlige?
+
+Det viste seg å være smart å ikke fokusere så mye på fancy GUI, og heller, ved egen evne, prøve
+å lage et fungerende spill i konsollen, med bra kodeoppsett og funksjonlitet.
+
+Mye forskjellig kode på kritisk aspekt med spillene gjorde det litt vanskelig å gjenbruke kode
+her og der. Ville kanskje prøvd å fått spillene til å bruke så mye som mulig lik kode.
+
+Det viste seg å være smart å bruke int[][] for brettet. Denne er veldig fin og lett å 
+manipulere, og passet veldig godt for den funksjonaliteten vi trenge på denne obligen.
+
+-Testing
+
+(hvordan du har testet ting)
+
+I tilleg til JUnit testing underveis, har jeg også oprettet dummy metoder inni spillene 
+for å raskt sjekke om en ting blir printet som det skal, eller at en metode blir stoppet
+når den skal bli stopper. Disse er selfølgelig slettet ved innlevering, men jeg nevner de her
+likevel.
+
+I BoardTest sjekker jeg at det ikke kan bli sendt in verdier som er mindre eller større enn
+width og height, out of bounds test. Skal caste exception dersom dette er tilfellet.
+Sjekker også her at isFull() returnerer rett verdi når brettet er fullt.
+
+I GameTest sjekker at det ikke går ann å plassere en brikke på en pos som allerde er tatt.
+Jeg sjekker også om det går ann å vinne med horizontal, vertical og diagonal combinasjoner.
+
+-Funksjonalitet, bugs
+
+(hva virker / virker ikke)
+
+Virker:
+
+All funksjonalitet for spillene fungerer som den skal.
+Brett blir laget og oppdatert, check for seier fungerer som den skal og stopper spillet
+om vi har en vinner. Spillene bruker kode fra Game som er felles for begge spillene. 
+
+Virker ikke:
+
+- Har laget en Board klasse som implementer IBoard. Ønket at begge spillene
+skulle lage brettene ut i fra denne klassen, lagde derfor en ny Board(width, height) inne i 
+spillklassene, og kalte på board.createBoard() for å lage board.
+Den klarte å opprette brettet, men når "place" metoden i TicTacToe blir kalt på får jeg 
+NullPointerException i case X alt etter hvilken X bruker skriver inn. 
+
+-Evt. erfaring fra code review
+
+(lærte du noe av å gå gjennom din eller andres kode?)
+
+-Annet
+
+Jeg ville ha fått Board til å fungere sånn at jeg hadde fått koden som har med brettet å gjør,
+bort fra selve spillklassene og inn i en Board.java klasse. Jeg ville også ha oprettet Player.java'
+og hatt med litt mer informasjon der om spillerene. Jeg begynte også på smartMove() metode for
+CPU. Dessverre klarte jeg å slette denne metoden og valgte å bruke en CPU som opererer med random
+verdier. smartMove() funksjonen min skulle iallefall, med samme prinsipp som sem1 der rabbits 
+skulle søke etter carrots, plassere brikker inntil hverandre og prøve å lage en linje. Den skulle 
+og sjekke om player1 (den som spiller) var 1 trekk unna å vinne, og skulle da "sabotere" for
+player 1. Prøvde altså å lage en unbeatable CPU	 :)

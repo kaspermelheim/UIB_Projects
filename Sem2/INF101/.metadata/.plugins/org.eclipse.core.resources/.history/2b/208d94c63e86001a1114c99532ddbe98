@@ -1,0 +1,71 @@
+package inf101.v20.sem2.board;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import inf101.v20.sem2.game.Connect4;
+import inf101.v20.sem2.game.TicTacToe;
+import inf101.v20.sem2.game.Game;
+
+class BoardTest extends Game{
+	
+	int[][] board;
+
+	@Test
+	/**
+	 * Checks for out of bounds inputs for TTT
+	 */
+	void outOfBoundsTestTTT() {
+		TicTacToe TTT = new TicTacToe();
+		
+		try {
+			TTT.place(0, 1);
+			fail("Should throw exception");
+		} catch (IndexOutOfBoundsException e) {
+			;
+		}
+		try {
+			TTT.place(10, 1);
+			fail("Should throw exception");
+		} catch (IndexOutOfBoundsException e) {
+			;
+		}
+	}
+	
+	@Test
+	/**
+	 * Checks for out of bounds inputs for C4
+	 */
+	void outOfBoundsTestC4() {
+		Connect4 C4 = new Connect4();
+		
+		try {
+			C4.place(-1, 1);
+			fail("Should throw exception");
+		} catch (IndexOutOfBoundsException e) {
+			;
+		}
+		try {
+			C4.place(8, 1);
+			fail("Should throw exception");
+		} catch (IndexOutOfBoundsException e) {
+			;
+		}
+	}
+	
+	@Test
+	void isFullTest() {
+		
+		//TTT
+		TicTacToe TTT = new TicTacToe();
+		int totalMovesTTT = 3 * 3;
+		assertTrue(TTT.isFull(totalMovesTTT));
+		
+		//C4
+		Connect4 C4 = new Connect4();
+		int totalMovesC4 = 8 * 8;
+		assertTrue(C4.isFull(totalMovesC4));
+	}
+
+}

@@ -1,0 +1,19 @@
+//Opprette ny tabell med foreign key refrence til game_store tabell
+CREATE TABLE Sales (
+    Publisher varchar(255),
+    Boardgame varchar(255),
+    Store_number int(32),
+    Year int(32),
+    Month int(32),
+    Quantity int NOT NULL,
+    FOREIGN KEY (Publisher, Boardgame) REFERENCES game_info(Publisher, Boardgame),
+    FOREIGN KEY (Store_number) REFERENCES game_store(Store_number)
+);
+
+//Commands for å hindre unwanted values bli adda i databasen vår
+ALTER TABLE game_info 
+ADD CHECK (Language = "Norwegian" OR Language = "English" OR Language = "German");
+
+ALTER TABLE Sales
+ADD CHECK (Store_number >= 1 AND Store_number < 20);
+

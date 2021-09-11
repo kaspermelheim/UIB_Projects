@@ -1,0 +1,37 @@
+package inf101.v20.sem2.example.GUI;
+
+import java.util.Scanner;
+
+import inf101.v20.sem2.game.TicTacToe;
+
+public class GUIMain {
+
+	public static void main(String[] args) {
+		
+		//GameGUI.run( () -> null); 
+		
+		boolean isReady = false;
+		
+		String welcomeMsg = "Welcome! Type in 1 to play Tic Tac Toe, or 2 to play Connect 4: ";
+		System.out.println(welcomeMsg);
+		
+		while(!isReady) {
+			Scanner input = new Scanner(System.in);
+			int gameID = input.nextInt();
+			
+			if(gameID == 1) {
+				//Starts the Tic Tac Toe game
+				TicTacToe TTTGame = new TicTacToe();
+				TTTGame.run();
+			}
+			else if(gameID == 2) {
+				//C4Game.run();
+				isReady = true;
+			}
+			else {
+				System.out.println("Invalid input. " + welcomeMsg);
+				gameID = input.nextInt()
+	;		}
+		}
+	}
+}

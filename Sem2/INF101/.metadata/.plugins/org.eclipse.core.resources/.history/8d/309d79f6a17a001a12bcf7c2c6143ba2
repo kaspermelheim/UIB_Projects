@@ -1,0 +1,18 @@
+package inf101.v20.sem2.game;
+
+/**
+ * Interface consisting of methods used in the two games
+ * @author Kasper
+ *
+ */
+
+public interface IGame {
+
+	String checkVictory();
+	
+	void place(String participant, int placement, char[][] board);
+	
+	void updateBoard(char[][] board);
+	
+	void run();
+}

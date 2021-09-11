@@ -1,0 +1,5 @@
+package inf101.v20.lab4.grid;
+
+public interface IBoard {
+
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="Lab6/inf101.v20.lab6/src/test/java/|Lab1/inf101.v20.lab1/src/main/java/|Sem2/inf101.v20.sem2/src/test/java/|Lab4/inf101.v20.lab4/src/main/java/|Lab7/inf101.v20.lab7/src/main/java/|Lab2/inf101.v20.lab2/src/test/java/|Lab5/inf101.v20.lab5/src/test/java/|Sem2.losning/inf101.v20.sem2.losning-master/src/test/java/|Sem1/inf101.v20.sem1/src/test/java/|Lab3/inf101.v20.lab3/src/main/java/|INF101/src/|Lab6/inf101.v20.lab6/src/main/java/|Sem2/inf101.v20.sem2/src/main/java/|Hobby/src/|Lab1/inf101.v20.lab1/src/test/java/|Lab4/inf101.v20.lab4/src/test/java/|Lab7/inf101.v20.lab7/src/test/java/|Lab2/inf101.v20.lab2/src/main/java/|Sem2.losning/inf101.v20.sem2.losning-master/src/main/java/|Enigma/Enigma-Machine/|Lab5/inf101.v20.lab5/src/main/java/|Sem1/inf101.v20.sem1/src/main/java/|Lab3/inf101.v20.lab3/src/test/java/" kind="src" path=""/>
+	<classpathentry kind="src" path="Enigma/Enigma-Machine"/>
+	<classpathentry kind="src" path="Hobby/src"/>
+	<classpathentry kind="src" path="INF101/src"/>
+	<classpathentry kind="src" path="Lab1/inf101.v20.lab1/src/main/java"/>
+	<classpathentry kind="src" path="Lab1/inf101.v20.lab1/src/test/java"/>
+	<classpathentry kind="src" path="Lab2/inf101.v20.lab2/src/main/java"/>
+	<classpathentry kind="src" path="Lab2/inf101.v20.lab2/src/test/java"/>
+	<classpathentry kind="src" path="Lab3/inf101.v20.lab3/src/main/java"/>
+	<classpathentry kind="src" path="Lab3/inf101.v20.lab3/src/test/java"/>
+	<classpathentry kind="src" path="Lab4/inf101.v20.lab4/src/main/java"/>
+	<classpathentry kind="src" path="Lab4/inf101.v20.lab4/src/test/java"/>
+	<classpathentry kind="src" path="Lab5/inf101.v20.lab5/src/main/java"/>
+	<classpathentry kind="src" path="Lab5/inf101.v20.lab5/src/test/java"/>
+	<classpathentry kind="src" path="Lab6/inf101.v20.lab6/src/main/java"/>
+	<classpathentry kind="src" path="Lab6/inf101.v20.lab6/src/test/java"/>
+	<classpathentry kind="src" path="Lab7/inf101.v20.lab7/src/main/java"/>
+	<classpathentry kind="src" path="Lab7/inf101.v20.lab7/src/test/java"/>
+	<classpathentry kind="src" path="Sem1/inf101.v20.sem1/src/main/java"/>
+	<classpathentry kind="src" path="Sem1/inf101.v20.sem1/src/test/java"/>
+	<classpathentry kind="src" path="Sem2.losning/inf101.v20.sem2.losning-master/src/main/java"/>
+	<classpathentry kind="src" path="Sem2.losning/inf101.v20.sem2.losning-master/src/test/java"/>
+	<classpathentry kind="src" path="Sem2/inf101.v20.sem2/src/main/java"/>
+	<classpathentry kind="src" path="Sem2/inf101.v20.sem2/src/test/java"/>
+	<classpathentry kind="output" path="Hobby/bin"/>
+</classpath>

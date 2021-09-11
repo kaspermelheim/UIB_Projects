@@ -1,0 +1,12 @@
+package inf101.v20.lab4.grid;
+
+public interface IBoard {
+
+	public void createBoard();
+	
+	public boolean isFull();
+	
+	public int getHeight();
+	
+	public int getWidth();
+}

@@ -1,0 +1,65 @@
+[Semesteroppgave 2: Fire på rad og Tripp-trapp-tresko]
+
+•Levert av:
+kme020
+
+•[ ] hele semesteroppgaven er ferdig og klar til retting!
+•Code review:
+•[ ] jeg har fått tilbakemelding underveis fra @brukernavn, ...
+•[ ] jeg har gitt tilbakemelding underveis til @brukernavn, ...
+•Sjekkliste:
+•[ ] Kjørbart Fire på Rad-spill* [ ] Funksjonelt spill* [ ] Fungerende user interface* [ ] Støtter AI 
+•[ ] Kjørbart Tripp-trapp-tresko-spill* [ ] Funksjonelt spill* [ ] Fungerende user interface* [ ] Støtter AI 
+•[ ] Forklart designvalg, hvordan koden er organisert, abstraksjon, og andre ting 
+•[ ] Tester
+•[ ] Dokumentasjon (JavaDoc, kommentarer, diagrammer, README, etc.)
+•[ ] Fornuftige navn på klasser, interfaces, metoder og variabler
+•[ ] Fornuftige abstraksjoner og innkapsling (bruk av klasser, interface, metoder, etc.)
+
+-Oversikt
+
+(oversikt over koden din og det du har gjort)
+
+-Bruk
+
+For å starte programmet kjør: fyll.inn.her
+ (...for å legge ut en brikke må du...)
+ (...når du vinner skjer...)
+ (...etc...)
+
+
+-Designvalg
+
+(hvordan du har valgt å løse oppgaven)
+
+-Bruk av abstraksjon
+
+(hvordan du har valgt objekter/klasser for å representere ting i spillet)
+
+-Erfaring – hvilke valg viste seg å være gode / dårlige?
+
+(designerfaringer – er det noe du ville gjort annerledes?)
+
+-Testing
+
+(hvordan du har testet ting)
+
+-Funksjonalitet, bugs
+
+(hva virker / virker ikke)
+
+Virker ikke:
+
+- Har laget en Board klasse som implementer IBoard. Ønket at begge spillene
+skulle lage brettene ut i fra denne klassen, lagde derfor en ny Board(width, height) inne i 
+spillklassene, og kalte på board.createBoard() for å lage board.
+Den klarte å opprette brettet, men når "place" metoden i TicTacToe blir kalt på får jeg 
+NullPointerException i case X alt etter hvilken X bruker skriver inn. 
+
+-Evt. erfaring fra code review
+
+(lærte du noe av å gå gjennom din eller andres kode?)
+
+-Annet
+
+(er det noe du ville gjort annerledes?)

@@ -1,0 +1,220 @@
+package inf101.v20.sem2.game;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.function.Supplier;
+
+public class TicTacToe implements IGame {
+	
+	List<Integer> player1Placements = new ArrayList<>();
+	List<Integer> player2Placements = new ArrayList<>();
+	List<Integer> cpuPlacements = new ArrayList<>();
+	
+	//The gameboard
+	char[][] board = {{' ','|',' ','|',' '},
+			{'-','+','-','+','-'},
+			{' ','|',' ','|',' '},
+			{'-','+','-','+','-'},
+			{' ','|',' ','|',' '}};
+	
+	char playerSymbol = 'x';
+	char cpuSymbol = 'o';
+	
+	static boolean isDone = false;
+	
+	public void runSingleplayer() {
+		updateBoard(board);
+		
+		while(!isDone) {
+			Scanner playerInput = new Scanner(System.in);
+			System.out.println("Enter placement:");
+			
+			int playerPlacement = playerInput.nextInt();
+			while(player1Placements.contains(playerPlacement) || cpuPlacements.contains(playerPlacement)) {
+				System.out.println("Placement already taken. Choose new placement: ");
+				playerPlacement = playerInput.nextInt();
+			}
+			
+			place("player1", playerPlacement, board);
+			updateBoard(board);
+			String message = checkVictory();
+			if(message.length() > 0) {
+				System.out.println(message);
+				break;
+			}
+			
+			//Gives the CPU a random pos to place at
+			int cpuPlacement = new Random().nextInt(9) + 1;
+			while(player1Placements.contains(cpuPlacement) || cpuPlacements.contains(cpuPlacement)) {
+				cpuPlacement = new Random().nextInt(9) + 1;
+			}
+			
+			place("cpu", cpuPlacement, board);
+			updateBoard(board);
+			message = checkVictory();
+			if(message.length() > 0) {
+				System.out.println(message);
+				break;
+			}
+		}
+	}
+	
+	public void runMultiplayer() {
+		updateBoard(board);
+		
+		while(!isDone) {
+			Scanner playerInput = new Scanner(System.in);
+			System.out.println("Player 1 placement:");
+			
+			int player1Placement = playerInput.nextInt();
+			while(player1Placements.contains(player1Placement) || player2Placements.contains(player1Placement)) {
+				System.out.println("Placement already taken. Choose new placement: ");
+				player1Placement = playerInput.nextInt();
+			}
+			
+			place("player1", player1Placement, board);
+			updateBoard(board);
+			String message = checkVictory();
+			if(message.length() > 0) {
+				System.out.println(message);
+				break;
+			}
+			
+			//Player 2 code
+			Scanner player2Input = new Scanner(System.in);
+			System.out.println("Player 2 placement:");
+			
+			int player2Placement = player2Input.nextInt();
+			while(player2Placements.contains(player2Placement) || player1Placements.contains(player2Placement)) {
+				System.out.println("Placement already taken. Choose new placement: ");
+				player2Placement = player2Input.nextInt();
+			}
+			
+			place("player2", player2Placement, board);
+			updateBoard(board);
+			message = checkVictory();
+			if(message.length() > 0) {
+				System.out.println(message);
+				break;
+			}
+		}
+	}
+	
+	public int smartMove() {
+		
+	}
+	
+	public void updateBoard(char[][] board) {
+		
+		for(char[] row : board) {
+			for(char i : row) {
+				System.out.print(i);
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+	
+	public void place(String participant, int placement, char[][] board) {
+		
+		char symbol = 'x';
+		if(participant == "player1") {
+			symbol = 'x';
+			player1Placements.add(placement);
+		}
+		else if(participant == "cpu") {
+			symbol = 'o';
+			cpuPlacements.add(placement);
+		}
+		else if(participant == "player2") {
+			symbol = 'o';
+			player2Placements.add(placement);
+		}
+		
+		switch(placement) {
+			case 1:
+				board[0][0] = symbol;
+				break;
+			case 2:
+				board[0][2] = symbol;
+				break;
+			case 3:
+				board[0][4] = symbol;
+				break;
+			case 4:
+				board[2][0] = symbol;
+				break;
+			case 5:
+				board[2][2] = symbol;
+				break;
+			case 6:
+				board[2][4] = symbol;
+				break;
+			case 7:
+				board[4][0] = symbol;
+				break;
+			case 8:
+				board[4][2] = symbol;
+				break;
+			case 9:
+				board[4][4] = symbol;
+				break;
+		}
+	}
+	
+	public List getVictoryConditions() {
+
+		ArrayList<List> victoryTriggers = new ArrayList<>();
+		
+		List leftCol = Arrays.asList(1, 4, 7);
+		List rightCol = Arrays.asList(3, 6, 9);
+		List midCol = Arrays.asList(2, 5, 8);
+		List topRow = Arrays.asList(1, 2, 3);
+		List midRow = Arrays.asList(4, 5, 6);
+		List botRow = Arrays.asList(7, 8, 9);
+		List leftDiag = Arrays.asList(1, 5, 9);
+		List rightDiag = Arrays.asList(3, 5, 7);
+		
+		victoryTriggers.add(leftCol);
+		victoryTriggers.add(rightCol);
+		victoryTriggers.add(midCol);
+		victoryTriggers.add(topRow);
+		victoryTriggers.add(midRow);
+		victoryTriggers.add(botRow);
+		victoryTriggers.add(leftDiag);
+		victoryTriggers.add(rightDiag);
+		
+		return victoryTriggers;
+		
+	}
+	public String checkVictory() {
+		
+		ArrayList<List> victoryTriggers = (ArrayList<List>) getVictoryConditions();
+		
+		for(List trigger : victoryTriggers) {
+			if(player1Placements.containsAll(trigger)) {
+				isDone = true;
+				return "Game over. Player 1 wins.";
+			}
+			else if(player2Placements.containsAll(trigger)) {
+				isDone = true;
+				return "Game over. Player 2 wins.";
+			}
+			else if(cpuPlacements.containsAll(trigger)) {
+				isDone = true;
+				return "Game over. CPU wins.";
+			}
+			else if(player1Placements.size() + cpuPlacements.size() == 9 || player1Placements.size() + player2Placements.size() == 9) {
+				isDone = true;
+				return "Its a draw.";
+			}
+		}
+		
+		return "";
+	}
+}
+
+

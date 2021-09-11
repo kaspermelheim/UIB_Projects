@@ -1,0 +1,37 @@
+package inf101.v20.sem2.game;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+class GameTest {
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+	void cantPlaceTestTTT() {
+		TicTacToe TTT = new TicTacToe();
+		List<Integer> placements = new ArrayList<>();
+		placements.add(3);
+		
+		assertFalse(TTT.canPlace(3));
+	}
+	
+	void canPlaceTestC4() {
+		
+	}
+	
+	void canWinTestTTT() {
+		
+	}
+	
+	void canWinTestC4() {
+		
+	}
+}
+

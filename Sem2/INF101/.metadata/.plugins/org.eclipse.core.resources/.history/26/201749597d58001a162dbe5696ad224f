@@ -1,0 +1,111 @@
+# Svar på spørsmål
+
+*I denne filen legger du inn svar på spørsmålene som stilles i oppgaveteksten, eventuelt kommentarer og informasjon om kreative løsninger*
+
+## Kommentarer
+(Eventuelle kommentarer på oppgaven eller koden her).
+
+## Spørsmål
+
+## Oppgave 1 - Abstrakte Ting
+
+### 1.1) 
+
+1. Finne hp til tingen
+2. Fjerne tingen fra brettet dersom hp er negativ og tingen er "ødelagt" (plukkes opp, dør..)
+3. Redusere hp til tingen dersom den tar skade
+4. Hva som skal skje når to ting møtes (angripe, plukke opp, stoppe opp om det er vegg.)
+5. Sjekke defence verdien til tingen, så vi kan finne ut hvor mye hp som må reduseres
+
+### 1.2) 
+1. getMaxHealth() henter ut maksimum liv for denne tingen, finner ut hvor mye den tåler 
+2. handleDamage() returnerer ny hp etter defence har blitt medreknet når noe mister hp
+3. getCurrentHealth() henter nåværende hp til tingen
+4. getDefence() finner ut hvor "sterk" tingen er
+5. getHealthStatus() sjekker om ting er død, perfekt, eller litt skadet alt etter hvor mye hp den har 
+
+
+### 1.3)
+1. getCurrentHealth() som returnerer "hp", der hp er satt lik getMaxHealth() 
+2. handleDamage() returnerer "amount"
+3. getDefence() returnerer 0
+4. getSize() returnerer str. på carrot, akkuratt som det finnes ulik str. på gulrot i virkeligheten
+5. getDefence() returnerer defence til carrot, i virkeligheten er det faktisk ikke sånn at gulrøtter har armor og beskyttelse.
+
+### 1.4)
+Klasser som implementerer IItem: Amulet, Carrot, Dust, Wall.
+
+## Oppgave 2 - The Rabbit
+
+### 2.1)
+Alle metodene i IItem er også med IActor, selv om de ikke e er listet opp. De vil si viss noe er en IActor kan den bruke metodene fra IItem.
+
+### 2.2)
+Om rabbit har mistet mer enn 2 health (mottatt 3 eller mer dmg) og den bruker runden på å spise (eatIfPossible(game) returnerer true) skal metoden stoppe og ikke kjøre performMove(game) (ikke flytte).
+
+### 2.3)
+(Svar her)
+
+### 2.4)
+(Svar her)
+
+## Oppgave 3 - Objektfabrikken
+
+### 3.1)
+(svar her)
+
+### 3.2)
+(svar her)
+
+### 3.3)
+(svar her)
+
+## Oppgave 4 - Et smartere kart
+
+### 4.1)
+(svar her)
+
+### 4.2)
+(svar her)
+
+### 4.3)
+(svar her)
+
+## Oppgave 5
+
+### 5.1)
+(svar her)
+
+### 5.2)
+(svar her)
+
+### 5.3)
+(svar her)
+
+### 5.4)
+(svar her)
+
+### 5.5)
+(svar her)
+
+## Oppgave 6
+
+### 6.1)
+(Svar her)
+
+### 6.2)
+(Svar her)
+
+### 6.3)
+(Svar her)
+
+## Fri oppgave (Oppg. 7)
+
+### Plan
+(Skriv planen her)
+
+### Utførelse
+(Forklar i korte trekk hva du har gjort)
+
+### Flere utvidelser
+(Legg inn eventuelle flere utvidelser du har gjort her)

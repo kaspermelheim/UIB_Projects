@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="C:\Users\Kasper\OneDrive - University of Bergen\Documents\INF101\Sem2.losning\inf101.v20.sem2.losning-master"/>
+			<item value="C:\Users\Kasper\OneDrive - University of Bergen\Documents\INF101\Sem2\inf101.v20.sem2"/>
+			<item value="C:\Users\Kasper\OneDrive - University of Bergen\Documents\INF101\Lab7\inf101.v20.lab7"/>
+			<item value="C:\Users\Kasper\OneDrive - University of Bergen\Documents\INF101\Lab6\inf101.v20.lab6"/>
+			<item value="C:\Users\Kasper\OneDrive - University of Bergen\Documents\INF101\Sem1\inf101.v20.sem1"/>
+			<item value="C:\Users\Kasper\OneDrive - University of Bergen\Documents\INF101\Lab3\inf101.v20.lab3"/>
+			<item value="C:\Users\Kasper\OneDrive - University of Bergen\Documents\INF101\Enigma\Enigma-Machine"/>
+			<item value="C:\Users\Kasper\INF101V20\HelloWorld"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>

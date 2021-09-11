@@ -1,0 +1,105 @@
+package inf101.v20.lab6.terminal;
+
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import inf101.v20.lab6.command.Cat;
+import inf101.v20.lab6.command.ICommand;
+import inf101.v20.lab6.command.Ls;
+import inf101.v20.lab6.system.IPrinter;
+
+import inf101.v20.lab6.command.Exit;
+
+
+/**
+ * A terminal with state and a set of commands. It forwards lines to their
+ * corresponding commands.
+ */
+public class Terminal {
+
+	private final Map<String, ICommand> commands = new HashMap<>();
+	private final TerminalState state;
+	private IPrinter printer;
+
+	public Terminal(IPrinter printer) {
+		this.printer = printer;
+		state = new TerminalState(Path.of("/"));
+		installCommands(Arrays.asList(new Ls(printer), new Cat(printer), new Exit(printer)));
+
+	}
+
+	/**
+	 * Splits the line to command and arguments, and executes the command with the
+	 * arguments
+	 * 
+	 * @param line Entire command string, ex.
+	 * 
+	 *             <pre>
+	 *             "cat myFile.txt"
+	 *             </pre>
+	 */
+	public void send(String line) {
+		String commandName = line.split(" ")[0];
+		String arguments = line.substring(commandName.length(), line.length()).strip();
+		if (commands.containsKey(commandName)) {
+			executeCommand(commands.get(commandName), arguments);
+		} else {
+			printer.printLine("Command [" + commandName + "] does not exist.");
+		}
+	}
+
+	/**
+	 * Executes the command and deals with potential exceptions
+	 * 
+	 * @param command   The command to execute
+	 * @param arguments A string with the arguments, excluding the command
+	 */
+	public void executeCommand(ICommand command, String arguments) {
+		command.execute(arguments, state);
+	}
+
+	/**
+	 * Inserts all the commands
+	 * 
+	 * @param availableCommands List of all command instantiations
+	 */
+	protected void installCommands(List<ICommand> availableCommands) {
+		for (ICommand command : availableCommands) {
+			String name = getCommandName(command);
+			if (commands.containsKey(name)) {
+				throw new IllegalArgumentException("Command " + name + " was installed twice.");
+			}
+			commands.put(name, command);
+		}
+	}
+
+	/**
+	 * Gets the name used to execute the command by looking at the lowercase of the
+	 * class name Ex: Cat.java => "cat"
+	 * 
+	 * @param c The command
+	 * @return The name used to execute the command
+	 */
+	private String getCommandName(ICommand c) {
+		return c.getClass().getSimpleName().toLowerCase();
+	}
+
+	/**
+	 * Prints a prompt line
+	 */
+	public void prompt() {
+		printer.print("\n" + state.getCurrentDirectory().toString() + " > ");
+	}
+
+	/**
+	 * Gets the state of the terminal
+	 * 
+	 * @return The state of the terminal
+	 */
+	public TerminalState getState() {
+		return state;
+	}
+}

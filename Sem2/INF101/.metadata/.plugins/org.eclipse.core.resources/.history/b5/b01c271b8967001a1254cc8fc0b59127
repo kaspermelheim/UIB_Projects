@@ -1,0 +1,105 @@
+package inf101.v20.lab5.furniture;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import inf101.v20.lab5.datastructure.Storage;
+import inf101.v20.lab5.furniture.component.Drawer;
+import inf101.v20.lab5.furniture.component.LaundryBasket;
+import inf101.v20.lab5.furniture.component.Shelf;
+import inf101.v20.lab5.item.Clothing;
+
+/**
+ * This type holds storage units for {@link inf101.v20.lab5.item.Clothing Clothing} 
+ * 
+ * @author anna
+ *
+ */
+public class Wardrobe implements Iterable<Clothing>, Iterator<Storage> {
+
+	private List<Storage> storage;
+
+	/**
+	 * Creates a new wardrobe with the indicated number of shelves, drawers and laundry size
+	 * @param numberOfShelves The number of shelves in this wardrobe
+	 * @param numberOfDrawers The number of drawers in this wardrobe 
+	 * @param laundrySize the number of items in the laundry before it is full and will be cleaned
+	 */
+	public Wardrobe(int numberOfShelves, int numberOfDrawers, int laundrySize) {
+		storage = new ArrayList<>();
+		for(int i=0; i<numberOfShelves; i++) {
+			storage.add(new Shelf());
+		}
+		for(int i=0; i<numberOfDrawers; i++) {
+			storage.add(new Drawer());
+		}
+		storage.add(new LaundryBasket(laundrySize));
+	}
+
+	/**
+	 * Adds an item of clothing to this wardrobe
+	 * @param item the clothing to add 
+	 * @return true if there was a space for this item and this item was successfully added, false otherwise
+	 */
+	public boolean add(Clothing item){
+		//TODO 5.4)
+		return false;
+	}
+
+	/**
+	 * Uses a desired item from the wardrobe. 
+	 * 
+	 * The item becomes dirty and is added to the laundry during the execution of this method. 
+	 * 
+	 * If the item was not found in the wardrobe, or was already dirty, or the laundry is full, 
+	 * this method will not succeed. 
+	 *  
+	 * @param item the desired item
+	 * @return true if item was found and removed, false otherwise
+	 * @throws IllegalStateException if the laundry is full
+	 * @throws IllegalArgumentException if the item is dirty
+	 * @throws NullPointerException if the item is null
+	 */
+	public boolean use(Clothing item) {
+		//TODO 5.4)
+		return false;
+	}
+
+	/**
+	 * Washes everything that was in the laundry basket
+	 * 
+	 * Ensures that everything in this wardrobe is clean and the laundry is empty
+	 */
+	public void doLaundry() {
+		//TODO 5.4)
+	}
+
+	@Override
+	public Iterator<Clothing> iterator() {
+		//TODO 5.4)
+		return null;
+	}
+
+	@Override
+	public boolean hasNext() {
+		//TODO 5.4)
+		return false;
+	}
+
+	@Override
+	public Storage next() {
+		//TODO 5.4)
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder s = new StringBuilder();
+		s.append("Wardrobe [\n");
+		storage.forEach(i -> s.append((i.toString()+"\n")));
+		s.append("]");
+		return s.toString().replace("[\n]", "[]");
+	}
+}

@@ -1,0 +1,34 @@
+package inf101.v20.lab6.command;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+
+import inf101.v20.lab6.system.IPrinter;
+import inf101.v20.lab6.terminal.TerminalState;
+
+/**
+ * A terminal command for listing the content in current folder
+ */
+public class Cd implements ICommand {
+
+	private final IPrinter printer;
+
+	public Cd(IPrinter printer) {
+		this.printer = printer;
+
+	}
+
+	@Override
+	public void execute(String arguments, TerminalState state) {
+		List<File> content = Arrays.asList(state.getCurrentDirectory().toFile().listFiles());
+		printer.printLine(String.format("%-10s%s", "dir", "."));
+		printer.printLine(String.format("%-10s%s", "dir", ".."));
+		for (File file : content) {
+			if (file.getName().charAt(0) == '.')
+				continue;
+			printer.printLine(String.format("%-10s%s", file.isDirectory() ? "dir" : "file", file.getName()));
+		}
+	}
+
+}

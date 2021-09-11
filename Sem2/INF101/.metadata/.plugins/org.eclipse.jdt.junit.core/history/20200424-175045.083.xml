@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="GameTest" project="inf101.v20.sem2" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="inf101.v20.sem2.game.GameTest" time="0.022" displayname="GameTest" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]">
+    <testcase name="cantPlaceTestTTT" classname="inf101.v20.sem2.game.GameTest" time="0.022" displayname="cantPlaceTestTTT()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]/[method:cantPlaceTestTTT()]"/>
+  </testsuite>
+</testrun>

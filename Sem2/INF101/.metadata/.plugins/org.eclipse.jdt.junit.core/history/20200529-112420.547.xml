@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ScrabbleTest" project="Hobby" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="Testing.ScrabbleTest" time="0.022" displayname="ScrabbleTest" uniqueid="[engine:junit-jupiter]/[class:Testing.ScrabbleTest]">
+    <testcase name="testCanMakeEksamen" classname="Testing.ScrabbleTest" time="0.014" displayname="testCanMakeEksamen()" uniqueid="[engine:junit-jupiter]/[class:Testing.ScrabbleTest]/[method:testCanMakeEksamen()]"/>
+    <testcase name="testCanNotMakeFerie" classname="Testing.ScrabbleTest" time="0.008" displayname="testCanNotMakeFerie()" uniqueid="[engine:junit-jupiter]/[class:Testing.ScrabbleTest]/[method:testCanNotMakeFerie()]"/>
+  </testsuite>
+</testrun>

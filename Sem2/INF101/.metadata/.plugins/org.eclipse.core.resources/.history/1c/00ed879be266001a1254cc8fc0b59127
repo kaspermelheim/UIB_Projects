@@ -1,0 +1,75 @@
+package inf101.v20.lab5.furniture.component;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import inf101.v20.lab5.datastructure.Storage;
+import inf101.v20.lab5.furniture.component.LaundryBasket;
+import inf101.v20.lab5.item.Clothing;
+/**
+ * A laundryBasket for retaining dirty clothes. Can only contain dirty clothes.  
+ * 
+ * @author anna
+ *
+ */
+public class LaundryBasket implements Storage{
+
+	private List<Clothing> clothes;
+	private int limit;
+
+	public LaundryBasket(int laundrySize) {
+		clothes = new ArrayList<Clothing>();
+		limit = laundrySize;
+	}
+
+	public boolean add(Clothing item) {
+		//TODO 5.3)
+		return false;
+	}
+	
+	@Override
+	public boolean has(Clothing item) {
+		return clothes.contains(item);
+	}
+
+	@Override
+	public boolean canAdd(Clothing item) {
+		//TODO 5.3)
+		return false;
+	}
+
+	@Override
+	public boolean remove(Clothing item) {
+		//TODO 5.3)
+		return false;
+	}
+
+	@Override
+	public Iterator<Clothing> iterator() {
+		//TODO 5.3)
+		return null;
+	}
+	
+	@Override
+	public String toString() {
+		final StringBuilder s = new StringBuilder();
+		s.append("LaundryBasket [\n");
+		clothes.forEach(i -> s.append((i.toString()+"\n")));
+		s.append("]");
+		return s.toString();
+	}
+	
+	/**
+	 * Removes all clothing items from the laundry basket, and returns 
+	 * an iterator over the same objects with isDirty set to true 
+	 * 
+	 * @return an iterator of clean clothing items
+	 */
+	public Iterable<Clothing> washEverything(){
+		List<Clothing> listCopy = List.copyOf(clothes);
+		//TODO 5.3)
+		return listCopy;
+	}
+}

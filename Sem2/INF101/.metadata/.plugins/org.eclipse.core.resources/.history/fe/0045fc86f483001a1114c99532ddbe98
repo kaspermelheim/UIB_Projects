@@ -1,0 +1,57 @@
+package inf101.v20.sem2.game;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ * Interface consisting of methods used in the two games
+ * @author Kasper
+ *
+ */
+
+public interface IGame {
+
+	/**
+	 * Run game with multiplayer settings
+	 */
+	
+	public void runMultiplayer() throws IOException;
+	
+	/**
+	 * Run game with singleplayer settings
+	 */
+	
+	public void runSingleplayer() throws IOException;
+
+	/**
+	 * Gets random column
+	 * @param width
+	 * @return returns random column
+	 */
+
+	public int getRandomNumber(int start, int range);
+	
+	/**
+	 * Places a playerobject on the board
+	 * @param column
+	 * @param playerNum
+	 */
+	
+	public boolean place(int column, int playerNum);
+	
+	public boolean canPlace(int column);
+	
+	public boolean isFull();
+	
+	public boolean checkVictory(int x, int y);
+
+	/**
+	 * Prints the current board to the console
+	 * @param board
+	 */
+	
+	public void createBoard(int[][] board);
+
+}

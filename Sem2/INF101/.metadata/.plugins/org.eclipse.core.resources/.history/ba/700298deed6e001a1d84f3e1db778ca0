@@ -1,0 +1,58 @@
+package inf101.v20.lab6.losning.command;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import inf101.v20.lab6.losning.system.IPrinter;
+import inf101.v20.lab6.losning.system.StdOutPrinter;
+import inf101.v20.lab6.losning.terminal.TerminalState;
+
+public class ExitTest {
+
+	private TerminalState state;
+
+	private Exit exit;
+
+	private IPrinter printer;
+
+	@BeforeEach
+	public void setup(@TempDir Path dir) throws IOException {
+		dir.toFile();
+
+		Path folder1 = dir.resolve("folder1");
+		Path folder2 = dir.resolve("folder2");
+
+		folder1.toFile().mkdir();
+		folder2.toFile().mkdir();
+
+		dir.resolve("a.txt").toFile().createNewFile();
+		dir.resolve("b.txt").toFile().createNewFile();
+		dir.resolve("c.txt").toFile().createNewFile();
+
+		folder1.resolve("d.txt").toFile().createNewFile();
+
+		state = new TerminalState(dir);
+		printer = new StdOutPrinter();
+
+		exit = new Exit(printer);
+
+	}
+	
+	@Test
+	public void exitPrintsMsg() throws IOException {
+		exit.execute("", state);
+		assertTrue(state.isDone());
+		// Assertion here
+
+	}
+
+}

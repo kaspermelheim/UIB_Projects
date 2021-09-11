@@ -1,0 +1,14 @@
+package inf101.v20.sem2.game;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class TicTacToeTest {
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}

@@ -1,0 +1,85 @@
+package inf101.v20.sem2.game;
+
+import java.io.IOException;
+import java.util.Random;
+
+/**
+ * All the methods from IGame. Only the methods that are the same for both of the games
+ * are used in this class, the rest of them gets overrided by the methods that are actually
+ * written inside the gameclass.
+ * @author Kasper
+ *
+ */
+
+public class Game implements IGame {
+
+	@Override
+	public void runMultiplayer() throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void runSingleplayer() throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	/**
+	 * Returns a random number for the CPU to use in its placement.
+	 */
+	public int getRandomNumber(int start, int range) {
+		Random random = new Random();
+		int num = random.ints(1, start, range).findFirst().getAsInt();
+		
+		return num;	
+	}
+
+	@Override
+	public boolean place(int column, int playerNum) {
+		return false;
+	}
+
+	@Override
+	public boolean canPlace(int column) {
+		return false;
+	}
+
+	@Override
+	public boolean isFull() {
+		return false;
+	}
+
+	@Override
+	public boolean checkVictory(int x, int y) {
+		return false;
+	}
+
+	@Override
+	/**
+	 * Creates the board. Frequently used as we need to create a new board consisting of the
+	 * placement of the players. Could also be called updateBoard.
+	 */
+	public void createBoard(int[][] board) {
+		
+		System.out.println("________");
+
+		for(int i = 0; i < board.length; i++) {
+			
+			for(int j = 0; j < board[0].length; j++) {
+				
+				if(board[i][j] == 0) {
+					System.out.print("-  ");
+				}
+				else {
+					System.out.print(board[i][j] + "  ");
+				}
+			}
+			System.out.println();
+		}
+		
+		System.out.println("________");		
+	}
+
+}

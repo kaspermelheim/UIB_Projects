@@ -1,0 +1,246 @@
+package inf101.v20.sem2.example.GUI;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.function.Supplier;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import inf101.v20.lab4.grid.Grid;
+
+/**
+ * Skeleton GUI class for a clickable grid-based GUI with two buttons
+ * 
+ * NB: Students are free to change anything in this class, or not use it at all! 
+ *  
+ * @author Anna Eilertsen
+ */
+public class GameGUI extends JPanel implements ActionListener{
+
+	private static final long serialVersionUID = 8755882090377973497L;
+
+	/**
+s	 * Initializes a JFrame in which we place the game
+	 * @param gameSupplier A lambda function that provides new games
+	 */
+	public static void run(Supplier gameSupplier) {
+		JFrame f = new JFrame("Example Frame Name");
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		GameGUI ap = new GameGUI(gameSupplier);
+		ap.collectPlayerInfo();
+		ap.initialize();
+		f.add("Center", ap);
+		f.pack();
+		f.setVisible(true);
+	}
+
+	// Fields 
+	
+	/**
+	 * Reference to button1 
+	 */
+	private JButton restartButton;
+	/**
+	 * Reference to button2 
+	 */
+	private JButton stopButton;
+	/**
+	 * Status message in frame  
+	 */
+	private JLabel statusMessage;
+	/**
+	 * References to panels that can be clicked  
+	 * These are stored by the frame, but it is convenient to have direct access  
+	 */
+	private Grid<JPanel> clickablePanels;
+	/**
+	 * A function that provides games
+	 */
+	private Supplier gameSupplier; //TODO should probably be generics 
+
+	public GameGUI(Supplier gameSupplier) {
+		this.gameSupplier = gameSupplier;
+		//TODO initialize to default values 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * Called whenever a button is pressed  
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == restartButton) {
+			reset("Clicked the button " + restartButton.getText());
+		}
+		if(e.getSource() == stopButton) {
+			reset("Clicked the button " + stopButton.getText());
+		}
+	}
+
+	/**
+	 * Resets the game 
+	 * 
+	 * @param exampleParam 
+	 */
+	private void reset(String msg) {
+		updateMessage(msg);
+		removeAll();
+		initialize();
+		this.updateUI();
+	}
+	
+	/** 
+	 * Ends the game
+	 */
+	
+	private void end(String msg) {
+		
+	}
+
+	/**
+	 * Helper method to control the status message 
+	 * @param exampleParam 
+	 */
+	private void updateMessage(String msg) {
+		statusMessage.setText(msg);
+	}
+
+	//Class that defines what happens (i.e: the color changes) when a panel is clicked
+	class BoxListener extends MouseAdapter{
+		public void mousePressed(MouseEvent me){
+			JPanel clickedPanel =(JPanel)me.getSource(); // get the reference to the box that was clicked 
+			clickedPanel.setBackground(clickedPanel.getBackground()==Color.BLACK ? Color.GREEN : Color.BLACK);
+		}
+	}
+
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(100*5, 100*5);
+	}
+
+	
+	/**
+	 * Sets up the GUI.
+	 */
+	public void initialize() {
+		setLayout(new BorderLayout());
+		JPanel p = new JPanel();
+		p.setLayout(new GridLayout(5, 5));
+		p.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+		this.clickablePanels = new Grid<JPanel>(5, 5, null);
+		for(int y = 0; y<5; y++) {
+			for (int x=0; x<5; x++) {
+				JPanel pan = new JPanel();
+				pan.setEnabled(true);
+				pan.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+				pan.addMouseListener(new BoxListener()); // add a mouse listener to make the panels clickable
+				p.add(pan);
+				clickablePanels.set(x, y, pan);
+			}
+		}
+		p.setRequestFocusEnabled(true);
+		p.requestFocus();
+		add(p);
+
+		JPanel buttons = createButtonPanel();
+		add(buttons, BorderLayout.SOUTH);
+
+		add(statusMessage, BorderLayout.NORTH);
+
+		validate();
+	}
+
+	/**
+	 * Helper method that creates the button panel 
+	 */
+	private JPanel createButtonPanel() {
+		stopButton = new JButton();
+		stopButton.addActionListener(this);
+		stopButton.setText("Restart");
+		stopButton.setBackground(Color.RED);
+
+		restartButton = new JButton();
+		restartButton.addActionListener(this);
+		restartButton.setText("End game");
+		restartButton.setBackground(Color.GREEN);
+
+		statusMessage = new JLabel();
+		statusMessage.setText("Welcome to ! ");
+
+		JPanel buttons = new JPanel();
+		buttons.setLayout(new BorderLayout());
+		buttons.add(restartButton, BorderLayout.WEST);
+		buttons.add(stopButton, BorderLayout.EAST);
+		return buttons;
+	}
+
+	/**
+	 * Helper method to collect player info 
+	 */
+	private void collectPlayerInfo() {
+		JFrame frame = new JFrame();
+		boolean multiplayer = promptMultiplayer(frame);
+		System.out.println("This game will be played by" + (multiplayer ? " two players " : " one player"));
+		System.out.println("Hello " + promptPlayerName(frame, "player 1"));
+		System.out.println("Hello " + promptPlayerName(frame, "player 2"));
+	}
+
+	/**
+	 * Helper method that prompts for player name 
+	 * @param player the name of the player that will be used in the prompt dialog
+	 */
+	private String promptPlayerName(JFrame frame, String player) {
+		String name = (String)JOptionPane.showInputDialog(
+				frame,
+				"Welcome " + player  + ":\n"
+						+ "What is your name?",
+						"Example StartUp",
+						JOptionPane.PLAIN_MESSAGE,
+						null,
+						null,
+						null);
+		//Debug: 
+		if ((name != null) && (name.length() > 0)) {
+			System.out.println("Received " + name);
+		}
+		return name;
+	}
+
+	/**
+	 * Helper method that prompts for multiplayer or not  
+	 * @return true if multiplayer is selected, false otherwise
+	 */
+	private boolean promptMultiplayer(JFrame frame) {
+		Object[] possibilities = {"Multiplayer", "Single Player (against AI)"};
+		String s = (String)JOptionPane.showInputDialog(
+				frame,
+				"Welcome:\n"
+						+ "Select one or two players",
+						"MKGame StartUp",
+						JOptionPane.PLAIN_MESSAGE,
+						null,
+						possibilities,
+						null);
+
+		//Debug: 
+		if ((s != null) && (s.length() > 0)) {
+			System.out.println("Received " + s);
+		}
+		return s.charAt(0)=='M';
+	}
+
+}

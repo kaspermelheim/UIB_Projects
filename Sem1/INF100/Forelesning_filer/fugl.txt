@@ -1,0 +1,3 @@
+Blåmeis 12 32 1 9
+Gråspurv 31 4 81
+Raudstrupe 4 6

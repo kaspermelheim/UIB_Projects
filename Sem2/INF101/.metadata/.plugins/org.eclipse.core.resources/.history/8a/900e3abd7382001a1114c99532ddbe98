@@ -1,0 +1,46 @@
+package inf101.v20.sem2.game;
+
+public class Connect4 implements IGame {
+	
+	final int height = 8;
+	final int width = 8;
+	int totalMoves;
+	int[][] board;
+	
+	public Connect4() {
+		board = new int[height][width];
+		totalMoves = 0;
+	}
+
+	@Override
+	public String checkVictory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void place(String participant, int placement, char[][] board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateBoard(char[][] board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void runSingleplayer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void runMultiplayer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+}

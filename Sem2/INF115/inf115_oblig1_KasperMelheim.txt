@@ -1,0 +1,267 @@
+INF115 Oblig 1 Kasper Melheim
+
+-------------------------------
+
+1a)
+
+//Teller antall codon_id data lagt inn og lager ny column med namn "Codon_count"
+
+SELECT COUNT(codon_id) AS Codon_count
+FROM Codons;
+
+1b)
+
+//Henter ut all info om amino syrer som har masse > 150 and positiv ladning
+
+SELECT *
+FROM amino_acid_properties
+WHERE Molecular_mass > 150 AND Charge = "positive";
+
+1c)
+
+//Henter ut all info om nukleoider med symbol = "Purine". Kan alternativt skrive SELECT Name, 
+//istdenfor * for å kun hente ut navnet.
+
+SELECT * 
+FROM nucleotides 
+WHERE Type = "Purine"
+ORDER BY Symbol ASC;
+
+1d)
+
+//Viser Codon_sequences som har lik verdi i position2 og position3
+
+SELECT Codon_sequence
+FROM codons 
+WHERE Position2 = Position3;
+
+1e)
+
+//Viser Codon_sequence og amino_acid_id, der amino syre id kun dukker opp en gang.
+
+SELECT Codon_sequence, Amino_acid_id
+FROM codons
+GROUP BY Amino_acid_id
+HAVING COUNT(*) = 1;
+
+------------------------------------
+
+2a)
+
+//Opretter table amino_acid_nomenclature med både primary og foreign keys
+
+CREATE TABLE Amino_acid_nomenclature (
+	Amino_id VARCHAR (20) UNIQUE,
+	Symbol_sequence CHAR (1) NULL,
+	Name VARCHAR (20) NULL,
+	Code VARCHAR (5),
+ 	CONSTRAINT Amino_id_pk PRIMARY KEY (Amino_id),
+ 	CONSTRAINT Name_fk FOREIGN KEY (Name) REFERENCES Amino_acid_properties (Name)
+);
+
+2b)
+
+//Setter inn verdier i amino_acid_nomenclature 
+
+INSERT INTO amino_acid_nomenclature VALUES("a1", "A", "Alanine", "Ala");
+INSERT INTO amino_acid_nomenclature VALUES("a2", "C", "Cysteine", "Cys");
+INSERT INTO amino_acid_nomenclature VALUES("a3", "D", "Aspartic acid", "Asp");
+INSERT INTO amino_acid_nomenclature VALUES("a4", "E", "Glutamic acid", "Glu");
+INSERT INTO amino_acid_nomenclature VALUES("a5", "F", "Phenylalanine", "Phe");
+INSERT INTO amino_acid_nomenclature VALUES("a6", "G", "Glycine", "Gly");
+INSERT INTO amino_acid_nomenclature VALUES("a7", "H", "Histidine", "His");
+INSERT INTO amino_acid_nomenclature VALUES("a8", "I", "Isoleucine", "Ile");
+INSERT INTO amino_acid_nomenclature VALUES("a9", "K", "Lysine", "Lys");
+INSERT INTO amino_acid_nomenclature VALUES("a10", "L", "Leucine", "Leu");
+INSERT INTO amino_acid_nomenclature VALUES("a11", "M", "Methionine", "Met");
+INSERT INTO amino_acid_nomenclature VALUES("a12", "N", "Asparagine", "Asn");
+INSERT INTO amino_acid_nomenclature VALUES("a13", "P", "Proline", "Pro");
+INSERT INTO amino_acid_nomenclature VALUES("a14", "Q", "Glutamine", "Gln");
+INSERT INTO amino_acid_nomenclature VALUES("a15", "R", "Arginine", "Arg");
+INSERT INTO amino_acid_nomenclature VALUES("a16", "S", "Serine", "Ser");
+INSERT INTO amino_acid_nomenclature VALUES("a17", "T", "Threonine", "Thr");
+INSERT INTO amino_acid_nomenclature VALUES("a18", "V", "Valine", "Val");
+INSERT INTO amino_acid_nomenclature VALUES("a19", "W", "Tryptophan", "Trp");
+INSERT INTO amino_acid_nomenclature VALUES("a20", "Y", "Tyrosine", "Tyr");
+INSERT INTO amino_acid_nomenclature VALUES("a21", NULL, NULL, "Stop");
+INSERT INTO amino_acid_nomenclature VALUES("a22", NULL, NULL, "Stop");
+INSERT INTO amino_acid_nomenclature VALUES("a23", NULL, NULL, "Stop");
+
+2c i)
+
+//Legger til constraint som sjekker at input på molecular_mass er ønsket mengde
+
+ALTER TABLE amino_acid_properties
+ADD CONSTRAINT CHK_Mass_Limit CHECK (Molecular_mass > 70 AND Molecular_mass < 210);
+
+Alternativ uten å navngi constraint:
+
+ALTER TABLE amino_acid_properties
+ADD CHECK (Molecular_mass > 70 AND Molecular_mass < 210);
+
+2c ii)
+
+ALTER TABLE amino_acid_properties
+ADD CONSTRAINT Chk_Charge CHECK (Charge = "positive" OR Charge = "negative" OR Charge = "uncharged");
+
+2d)
+
+//Legger til foreign key og kaller den Amino_acid_fk med CONSTRAINT
+
+ALTER TABLE Codons
+ADD CONSTRAINT Amino_acid_fk
+FOREIGN KEY (Amino_acid_id) REFERENCES amino_acid_nomenclature(Amino_id);
+
+------------------------------
+
+3a)
+
+//Henter ut all info om codons som har a1.Code = "Stop". Kobler sammen tabeller med JOIN
+
+SELECT c.*
+FROM codons c
+JOIN amino_acid_nomenclature a1 ON a1.Amino_id = c.Amino_acid_id
+WHERE a1.Code = "Stop";
+
+3b)
+
+//Henter ut codon_sequences som starter på nukleoiden Cytosine. Kobler tabeller codons og nucleotides
+//sammen med "join"
+
+SELECT c.Codon_sequence 
+FROM codons c
+JOIN nucleotides n ON n.Symbol = c.Position1
+WHERE n.Name = "Cytosine"
+
+3c)
+
+//Kobler sammen de tre tabellene vi vil bruke, får tak i massen ved å bruke amino_acid_nomenclature som
+//mellomledd da codons ikke er direkte koblet til amino_acid_properties. Viser også massen ved siden av 
+//codon_sequences
+
+SELECT c.Codon_sequence, a2.Molecular_mass 
+FROM codons c
+JOIN amino_acid_nomenclature a1 ON a1.Amino_id = c.Amino_acid_id
+JOIN amino_acid_properties a2 ON a2.Name = a1.Name
+ORDER BY a2.Molecular_mass ASC;
+
+3d)
+
+//Henter ut antall amino som er uncharged og med A i pos3, kobler sammen tabellene påm samme måte som i 3c)
+
+SELECT COUNT(a2.Charge) AS Count_Amino_Uncharged
+FROM codons c
+JOIN amino_acid_nomenclature a1 ON a1.Amino_id = c.Amino_acid_id
+JOIN amino_acid_properties a2 ON a2.Name = a1.Name
+WHERE c.Position3 = "A" AND a2.Charge = "uncharged";
+
+3e)
+
+//Kobler tabeller sammen på samme måte som i 3d og 3c, bruker WHERE for å sjekke conditions
+
+SELECT c.Codon_sequence, a1.Name
+FROM codons c
+JOIN amino_acid_nomenclature a1 ON a1.Amino_id = c.Amino_acid_id
+JOIN amino_acid_properties a2 ON a2.Name = a1.Name
+WHERE a2.Charge = "uncharged" AND (a2.Molecular_mass > 130 AND a2.Molecular_mass < 150);
+
+----------------------------------
+
+4a)
+
+/Bruker CASE for å sjekke multiple conditions, og vise resultat i to nye columns
+
+SELECT
+    SUM(CASE WHEN Type = "purine" THEN 1 ELSE 0 END) AS Purine_Count,
+    SUM(case when Type = "pyrimidine" THEN 1 ELSE 0 END) AS Purimidine_Count
+FROM nucleotides;
+
+4b)
+
+//Henter ut symbol til aminosyrer med lik verdi i pos1, pos2 og pos3 columns
+
+SELECT a1.Symbol
+FROM codons c
+JOIN amino_acid_nomenclature a1 ON a1.Amino_id = c.Amino_acid_id
+WHERE c.Position1 = c.Position2 AND c.Position1 = c.Position3
+ORDER BY a1.Name;
+
+4c)
+
+//Bruker LIKE for å sjekke om de 3 siste bokstavene i a2.Name er "ine"
+
+SELECT c.Codon_sequence
+FROM codons c
+JOIN amino_acid_nomenclature a1 ON a1.Amino_id = c.Amino_acid_id
+JOIN amino_acid_properties a2 ON a2.Name = a1.Name
+JOIN nucleotides n ON n.Symbol = c.Position1
+WHERE a2.Polarity = "polar" AND a2.Name LIKE "%ine" AND n.Type = "purine";
+
+4d)
+
+//Kobler tabellene sammen og bruker SUM for å telle antall codons som passer til condition inni CASE,
+//presenter data i hver sin column Polar og Nonpolar. Totalt 64 codons, men 61 blir bare vist siden
+//3 av codonsa er koblet til hver sin aminosyre som har STOP verdi. 
+
+SELECT
+    SUM(CASE WHEN a2.Polarity = "polar" THEN 1 ELSE 0 END) AS Polar,
+    SUM(CASE WHEN a2.Polarity = "non polar" THEN 1 ELSE 0 END) AS Nonpolar
+FROM codons c
+JOIN amino_acid_nomenclature a1 ON a1.Amino_id = c.Amino_acid_id
+JOIN amino_acid_properties a2 ON a2.Name = a1.Name;
+
+
+4e)
+
+SELECT
+    COUNT(CASE 
+          WHEN a2.Polarity = "polar" AND a2.Charge = "uncharged" THEN 1 END) AS "Polar/Uncharged",
+    COUNT(CASE 
+          WHEN a2.Polarity = "polar" AND a2.Charge = "positive" THEN 1 END) AS "Polar/Positive",
+    COUNT(CASE 
+          WHEN a2.Polarity = "polar" AND a2.Charge = "negative" THEN 1 END) AS "Polar/Negative",
+    COUNT(CASE 
+          WHEN a2.Polarity = "non polar" AND a2.Charge = "uncharged" THEN 1 END) AS "Nonpolar/Uncharged"
+FROM codons c
+JOIN amino_acid_nomenclature a1 ON a1.Amino_id = c.Amino_acid_id
+JOIN amino_acid_properties a2 ON a2.Name = a1.Name;
+
+Alternativ løsning uten bruk av CASE:
+
+SELECT Polarity, Charge, COUNT(*) AS Polarity_Count 
+FROM Codons c 
+INNER JOIN amino_acid_nomenclature a1 ON c.Amino_acid_id = a1.Amino_id 
+INNER JOIN amino_acid_properties a2 ON a1.Name = a2.Name 
+GROUP BY a2.Polarity, a2.Charge;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+package inf101.v20.sem2.example.GUI;
+
+import inf101.v20.sem2.game.TicTacToe;
+
+public class GUIMain {
+
+	public static void main(String[] args) {
+		
+		//GameGUI.run( () -> null); 
+		
+		//Starts the Tic Tac Toe game
+		TicTacToe TicTacToe = new TicTacToe();
+		System.out.println("Welcome! Type in 1 to play Tic Tac Toe, or 2 to play Connect 4: ");
+		Scanner input = nextInt(System.in);
+		
+		if(input == 1) {
+			TTT.run();
+		}
+		else if(input == 2) {
+			Connect4.
+		}
+	}
+}

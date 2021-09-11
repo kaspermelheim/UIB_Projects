@@ -1,0 +1,197 @@
+package inf101.v20.balls;
+
+import javafx.scene.paint.Paint;
+
+/**
+ * A class to represent bouncing balls
+ */
+public class Ball{
+
+	/** Color of the ball's surface */
+	private Paint color;
+	/** Radius of the ball */
+	private double radius;
+	/** The ball's position and speed in x direction. */
+	private Motion xMotion;
+	/** The ball's position and speed in y direction. */
+	private Motion yMotion;
+	/** Number of steps taken */
+	private int steps = 0;
+	/** Describes how well the ball bounces, needs to be between 0 and 1 */
+	private double bounceFactor = 0.99;
+
+	/**
+	 * Create a new ball with position and velocity (0,0)
+	 * 
+	 * @param color
+	 *            The color
+	 * @param radius
+	 *            The radius
+	 */
+	public Ball(Paint color, double radius) {
+		if (radius < 0) {
+			throw new IllegalArgumentException("Radius should not be negative");
+		}
+		// Instancing the color and radius variable
+		this.color = color;
+		this.radius = radius;
+		
+		//Instancing xMotion and yMotion variable from Motion.java class
+		this.xMotion = new Motion(0,0);
+		this.yMotion = new Motion(0,0);
+	}
+
+	/**
+	 * @return Current X position
+	 * Retrieves x position from Motion.java
+	 */
+	public double getX() {
+		return xMotion.getPosition();
+	}
+
+	/**
+	 * @return Current Y position
+	 * Retrieves y position from Motion.java
+	 */
+	public double getY() {
+		return yMotion.getPosition();
+	}
+	
+	/**
+	 * @return The ball's radius
+	 */
+	public double getRadius() {
+		return radius;
+	}
+
+	/**
+	 * @return The ball's width (normally 2x {@link #getRadius()})
+	 */
+	public double getWidth() {
+		return 2*radius;
+	}
+
+	/**
+	 * @return The ball's height (normally 2x {@link #getRadius()})
+	 */
+	public double getHeight() {
+		return 2*radius;
+	}
+
+	/**
+	 * @return Paint/color for the ball
+	 */
+	public Paint getColor() {
+		return color;
+	}
+
+	/**
+	 * Number of steps is used to determine the behavior of the ball
+	 * 
+	 * @return
+	 */
+	public int getSteps() {
+		return steps;
+	}
+
+	/**
+	 * Move ball to a new position.
+	 * 
+	 * After calling {@link #moveTo(double, double)}, {@link #getX()} will return
+	 * {@code newX} and {@link #getY()} will return {@code newY}.
+	 * 
+	 * Uses xMotion and yMotion setPosition() method from Motion.java to set the new position we
+	 * want the ball to move to. Gets new x and new y value as paramereter in moveTo();
+	 *	 * 
+	 * @param newX
+	 *            New X position
+	 * @param newY
+	 *            New Y position
+	 */
+	public void moveTo(double newX, double newY) {
+		xMotion.setPosition(newX);
+		yMotion.setPosition(newY);
+		
+	}
+	
+	/**
+	 * @return Current X movement
+	 * Used getSpeed() method from Motion.java to retrieve x movement
+	 */
+	public double getDeltaX() {
+		return this.xMotion.getSpeed();
+	}
+
+	/**
+	 * @return Current Y movement
+	 * Used getSpeed() method from Motion.java to retrieve y movement
+	 */
+	public double getDeltaY() {
+		return this.yMotion.getSpeed();
+	}
+	
+	/**
+	 * Perform one time step.
+	 * 
+	 * For each time step, the ball's (xPos,yPos) position should change by
+	 * (deltaX,deltaY).
+	 * 
+	 * move() calls on moveTo with the current x and y positions from getX() and getY() and adds the current
+	 * speed in x and y direction so the ball moves.
+	 */
+	public void move() {
+		moveTo(getX() + getDeltaX(), getY() + getDeltaY());
+	}
+
+	/**
+	 * Indicate that the ball has hit something, and should move back and
+	 * bounce.
+	 * 
+	 * If bounceX != 0 or bounceY != 0, then the ball has hit something in the X
+	 * and/or Y direction and should reverse its movement.
+
+	 * The (bounceX,bounceY) arguments can be added to the balls position in
+	 * order to stop it from overlapping with whatever it hit.
+	 * 
+	 * @param bounceX X-distance the ball needs to move in order to not overlap with the object it hit
+	 * @param bounceY Y-distance the ball needs to move in order to not overlap with the object it hit
+	 */
+	public void bounce(double bounceX, double bounceY) {
+		if(bounceX != 0){
+			xMotion.bounce(bounceX,bounceFactor);
+		}
+		if(bounceY != 0){
+			//System.out.println("y bounce");
+			yMotion.bounce(bounceY,bounceFactor);
+		}
+	}
+	
+	/**
+	 * This method makes one ball explode into 8 smaller balls with half the radius
+	 * @return the new balls after the explosion
+	 */
+	public Ball[] explode() {
+		return Ball(Paint getColor(), getRadius()/2);
+	}
+
+	/**
+	 * Changes the speed of this ball according to the rules for movement
+	 * @param xAcceleration The extra speed along the x-axis
+	 * @param yAcceleration The extra speed along the y-axis
+	 * 
+	 * Accelerate() parameters get sent as parameter to xMotion.accelerate in Motion.java and changes the 
+	 * speed.
+	 */
+	public void accelerate(double xAcceleration, double yAcceleration) {
+		xMotion.accelerate(xAcceleration);
+		yMotion.accelerate(yAcceleration);
+	}
+
+	/**
+	 * Stops the motion of this ball
+	 */
+	public void halt() {
+		xMotion.setSpeed(0);
+		yMotion.setSpeed(0);
+	}
+}

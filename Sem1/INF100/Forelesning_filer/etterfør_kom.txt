@@ -1,0 +1,10 @@
+# Her er mentorane i INF100
+# for høstsemesteret 2019.
+# Fila inneheld kommentarar.
+# Kvar kommentar startar med '#'.
+Gutierrez Fiskeseth, Elise   # Fredag 10-12
+Holm Hundvin, Maren          # Mandag 10-12, 16-18
+Dæhlie Aslesen, Kjersti      # Mandag 10-12
+Apeland, Kenneth             # Mandag 8-10, tirsdag 8-10
+Barlinn, Karl Henrik Elg     # Onsdag 12-14
+Klemetsdal Stene, Oda Inanna # Onsdag 12-14

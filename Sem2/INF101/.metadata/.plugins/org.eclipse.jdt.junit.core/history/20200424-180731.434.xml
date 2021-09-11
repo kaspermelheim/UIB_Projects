@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="GameTest" project="inf101.v20.sem2" tests="8" started="8" failures="0" errors="0" ignored="0">
+  <testsuite name="inf101.v20.sem2.game.GameTest" time="0.026" displayname="GameTest" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]">
+    <testcase name="cantPlaceTestTTT" classname="inf101.v20.sem2.game.GameTest" time="0.013" displayname="cantPlaceTestTTT()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]/[method:cantPlaceTestTTT()]"/>
+    <testcase name="canWinDiagonalTTT" classname="inf101.v20.sem2.game.GameTest" time="0.002" displayname="canWinDiagonalTTT()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]/[method:canWinDiagonalTTT()]"/>
+    <testcase name="canWinDiagonalc4" classname="inf101.v20.sem2.game.GameTest" time="0.001" displayname="canWinDiagonalc4()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]/[method:canWinDiagonalc4()]"/>
+    <testcase name="canWinHorizontalC4" classname="inf101.v20.sem2.game.GameTest" time="0.002" displayname="canWinHorizontalC4()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]/[method:canWinHorizontalC4()]"/>
+    <testcase name="cantPlaceTestC4" classname="inf101.v20.sem2.game.GameTest" time="0.001" displayname="cantPlaceTestC4()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]/[method:cantPlaceTestC4()]"/>
+    <testcase name="canWinVerticalC4" classname="inf101.v20.sem2.game.GameTest" time="0.001" displayname="canWinVerticalC4()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]/[method:canWinVerticalC4()]"/>
+    <testcase name="canWinVerticalTTT" classname="inf101.v20.sem2.game.GameTest" time="0.001" displayname="canWinVerticalTTT()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]/[method:canWinVerticalTTT()]"/>
+    <testcase name="canWinHorizontalTTT" classname="inf101.v20.sem2.game.GameTest" time="0.005" displayname="canWinHorizontalTTT()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]/[method:canWinHorizontalTTT()]"/>
+  </testsuite>
+</testrun>

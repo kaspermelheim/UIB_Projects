@@ -1,0 +1,42 @@
+package inf101.v20.sem2.game;
+
+import java.io.IOException;
+
+/**
+ * Interface consisting of methods used in the two games
+ * @author Kasper
+ *
+ */
+
+public interface IGame {
+
+	/**
+	 * Checks if condition for victory is met
+	 * @return String victory message
+	 */
+	String checkVictory();
+	
+	/**
+	 * Places a playerobject on the board
+	 * @param participant
+	 * @param placement
+	 * @param board
+	 */
+	void place(String participant, int placement, char[][] board);
+	
+	/**
+	 * Prints the current board to the console
+	 * @param board
+	 */
+	void updateBoard(char[][] board);
+	
+	/**
+	 * Run game with singleplayer settings
+	 */
+	void runSingleplayer();
+	
+	/**
+	 * Run game with multiplayer settings
+	 */
+	void runMultiplayer();
+}

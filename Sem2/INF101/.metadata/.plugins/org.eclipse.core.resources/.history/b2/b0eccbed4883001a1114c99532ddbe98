@@ -1,0 +1,358 @@
+package inf101.v20.sem2.game;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
+public class TicTacToeTest implements IGame {
+	
+	final int height = 3;
+	final int width = 3;
+	int totalMoves = 0;
+	int[][] board;
+	
+	List<Integer> player1Placements = new ArrayList<>();
+	List<Integer> player2Placements = new ArrayList<>();
+	
+	public TicTacToeTest() {
+		board = new int[height][width];
+		totalMoves = 0;
+	}
+	
+	public void runMultiplayer() throws IOException {
+		
+		System.out.println("Welcome to TicTacToe!");
+		updateBoard();
+		
+		Scanner playerInput = new Scanner(new InputStreamReader(System.in));
+		
+		mainLoop:
+			while(true) {
+				int column = 0;
+				//Player1
+				while(true) {
+					System.out.println("Player 1 placement:");
+					column = Integer.parseInt(playerInput.nextLine());
+					
+					if(canPlace(column)) {
+						if(place(column, 1)) {
+							updateBoard();
+							System.out.println("Game over. Player 1 wins!");
+							break mainLoop;
+						}
+						break;
+					}
+					else {
+						System.out.println("Placement in column " + column + " is already taken! Choose new placement: ");
+					}
+				}
+				updateBoard();
+				
+				//Player 2
+					while(true) {
+						System.out.println("Player 2 placement:");
+						column = Integer.parseInt(playerInput.nextLine());
+						
+						if(canPlace(column)) {
+							if(place(column, 2)) {
+								updateBoard();
+								System.out.println("Game over. Player 2 wins!");
+								break mainLoop;
+							}
+							break;
+						}
+						else {
+							System.out.println("Column " + column + " is already full!");
+						}
+					}
+					updateBoard();
+					
+					if(isFull()) {
+						System.out.println("Its a draw.");
+						break;
+					}
+			}
+	}
+	
+	public void runSingleplayer() throws IOException {
+
+		System.out.println("Welcome to TicTacToe! Type 1 to place in upper left corner, 2 for top row middle etc.");
+		updateBoard();
+		
+		Scanner playerInput = new Scanner(new InputStreamReader(System.in));
+		
+		mainLoop:
+			while(true) {
+				int column = 0;
+				//Player1
+				while(true) {
+					System.out.println("Player 1 placement:");
+					column = Integer.parseInt(playerInput.nextLine());
+					
+					if(canPlace(column)) {
+						if(place(column, 1)) {
+							updateBoard();
+							System.out.println("Game over. Player 1 wins!");
+							break mainLoop;
+						}
+						break;
+					}
+					else {
+						System.out.println("Placement in column " + column + " is already taken! Choose new placement: ");
+					}
+				}
+				updateBoard();
+				
+				//CPU
+					while(true) {
+						column = getRandomNumber(width);
+						
+						if(canPlace(column)) {
+							if(place(column, 2)) {
+								updateBoard();
+								System.out.println("Game over. CPU wins!");
+								break mainLoop;
+							}
+							break;
+						}
+						else {
+							System.out.println("");
+						}
+					}
+					updateBoard();
+					
+					if(isFull()) {
+						System.out.println("Its a draw.");
+						break;
+					}
+			}
+		
+	}
+
+
+	public int getRandomNumber(int width) {
+		
+		Random random = new Random();
+		int num = random.ints(1, 1, 10).findFirst().getAsInt();
+		
+		return num;
+		
+	}
+
+	
+	public boolean place(int placement, int playerNum) {
+		
+		
+		if(playerNum == 1) {
+			player1Placements.add(placement);
+		}
+		else if(playerNum == 2) {
+			player2Placements.add(placement);
+		}
+		
+		switch(placement) {
+		case 1:
+			board[0][0] = playerNum;
+			break;
+		case 2:
+			board[0][1] = playerNum;
+			break;
+		case 3:
+			board[0][2] = playerNum;
+			break;
+		case 4:
+			board[1][0] = playerNum;
+			break;
+		case 5:
+			board[1][1] = playerNum;
+			break;
+		case 6:
+			board[1][2] = playerNum;
+			break;
+		case 7:
+			board[2][0] = playerNum;
+			break;
+		case 8:
+			board[2][1] = playerNum;
+			break;
+		case 9:
+			board[2][2] = playerNum;
+			break;
+	}
+		
+		totalMoves++;
+		return checkVictory(0, 0);
+	}
+	
+	public boolean canPlace(int pos) {
+		
+		if(player2Placements.contains(pos) || player1Placements.contains(pos)) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean isFull() {
+		return totalMoves == height * width;
+	}
+	
+	public List getVictoryConditions() {
+
+		ArrayList<List> victoryTriggers = new ArrayList<>();
+		
+		List leftCol = Arrays.asList(1, 4, 7);
+		List rightCol = Arrays.asList(3, 6, 9);
+		List midCol = Arrays.asList(2, 5, 8);
+		List topRow = Arrays.asList(1, 2, 3);
+		List midRow = Arrays.asList(4, 5, 6);
+		List botRow = Arrays.asList(7, 8, 9);
+		List leftDiag = Arrays.asList(1, 5, 9);
+		List rightDiag = Arrays.asList(3, 5, 7);
+		
+		victoryTriggers.add(leftCol);
+		victoryTriggers.add(rightCol);
+		victoryTriggers.add(midCol);
+		victoryTriggers.add(topRow);
+		victoryTriggers.add(midRow);
+		victoryTriggers.add(botRow);
+		victoryTriggers.add(leftDiag);
+		victoryTriggers.add(rightDiag);
+		
+		return victoryTriggers;
+		
+	}
+
+	public boolean checkVictory(int x, int y) {
+
+		/**
+		int num = board[x][y];
+        int count = 0;
+        int i = y;
+        
+        //Horizontal check
+        while(i < width && board[x][i] == num){
+        	
+            count++;
+            i++;
+        }
+        
+        i=y-1;
+        while(i >= 0 && board[x][i] == num){
+        	
+            count++;
+            i--;
+        }
+        
+        if(count == 3) {
+            return true;
+        }
+        
+        //Vertical check
+        count = 0;
+        int j = x;
+        while(j < height && board[j][y] == num){
+        	
+            count++;
+            j++;
+        }
+        if(count == 3) {
+            return true;
+        }
+        
+        //Left diagonal check
+        count=0;
+        i = x;
+        j = y;
+        while(i < width && j < height && board[i][j] == num){
+        	
+            count++;
+            i++;
+            j++;
+        }
+        
+        i= x-1;
+        j= y-1;
+        while(i >= 0 && j >= 0 && board[i][j] == num){
+        	
+            count++;
+            i--;
+            j--;
+        }
+        
+        if(count == 3) {
+            return true;
+        }
+        
+        //Right diagonal check
+        count = 0;
+        i = x;
+        j = y;
+        while(i < width && j >= 0 && board[i][j] == num){
+        	
+            count++;
+            i++;
+            j--;
+        }
+        
+        i= x-1;
+        j= y+1;
+        while(i >= 0 && j < height && board[i][j] == num){
+            count++;
+            i--;
+            j++;
+        }
+        
+        if(count == 3) {
+            return true;
+        }
+        
+        return false; */
+		
+		ArrayList<List> victoryTriggers = (ArrayList<List>) getVictoryConditions();
+		
+		for(List trigger : victoryTriggers) {
+			if(player1Placements.containsAll(trigger)) {
+				//Player 1 wins
+				return true;
+			}
+			else if(player2Placements.containsAll(trigger)) {
+				//Player 2 wins
+				return true;
+			}
+			else if(player1Placements.size() + player2Placements.size() == 9) {
+				return true;
+			}
+		}
+		
+		return false;
+    }
+
+	public void updateBoard() {
+		
+		System.out.println("________");
+
+		for(int i = 0; i < board.length; i++) {
+			
+			for(int j = 0; j < board[0].length; j++) {
+				
+				if(board[i][j] == 0) {
+					System.out.print("-  ");
+				}
+				else {
+					System.out.print(board[i][j] + "  ");
+				}
+			}
+			System.out.println();
+		}
+		
+		System.out.println("________");
+		
+	}
+
+	
+}

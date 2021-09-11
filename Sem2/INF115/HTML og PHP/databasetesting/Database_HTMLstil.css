@@ -1,0 +1,101 @@
+#headerdiv h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    font-size: 25px;
+    margin-top: 20px;
+
+}
+
+#headerdiv p {
+    font-size: 15px;
+    margin-top: -10px;
+}
+
+header, #headerdiv, footer, #footerdiv {
+    width: 100%;
+    background: rgb(103, 103, 248);
+}
+
+#main {
+    width:710px;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+}
+
+#d1 {
+    padding: 20px;
+}
+
+h2, h3 {
+    font-size: 15px;
+}
+
+#imgdiv {
+    width: 100%;
+}
+
+h3 {
+    margin-top: 30px;
+
+}
+
+#mainimg, #imgdiv p {
+    width: 75%;
+    display: block;
+    margin: auto;
+    font-size: 11px;
+}
+
+
+body {
+    background-color: rgb(252, 240, 232);
+}
+
+html, body {
+    margin: 0;
+    margin-top: -7px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+table {
+    width: 90%;
+  }
+  td {
+    padding: 3px;
+  }
+  th {
+    padding: 3px;
+  }
+
+#headerdiv {
+    width: 50%;
+    margin: auto;
+    padding: 15px;
+
+}
+
+#footerdiv {
+    width: 50%;
+    margin: auto;
+    padding: 13px;
+}
+
+footer {
+    margin-bottom: 0;
+}
+
+#footerdiv p {
+    font-size: 15px;
+}
+
+#statusfailed {
+    background-color: rgb(253, 91, 91);
+    width: 50%;
+    padding: 5px;
+}
+
+#statusok {
+    background-color: rgb(93, 236, 93);
+    padding: 5px;
+    width: 50%;
+}

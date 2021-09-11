@@ -1,0 +1,74 @@
+package inf101.v20.sem2.game;
+
+import java.io.IOException;
+import java.util.Random;
+
+public class Game implements IGame {
+
+	@Override
+	public void runMultiplayer() throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void runSingleplayer() throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getRandomNumber(int start, int range) {
+		Random random = new Random();
+		int num = random.ints(1, start, range).findFirst().getAsInt();
+		
+		return num;	
+	}
+
+	@Override
+	public boolean place(int column, int playerNum) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canPlace(int column) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isFull() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkVictory(int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void createBoard() {
+		
+		System.out.println("________");
+
+		for(int i = 0; i < board.length; i++) {
+			
+			for(int j = 0; j < board[0].length; j++) {
+				
+				if(board[i][j] == 0) {
+					System.out.print("-  ");
+				}
+				else {
+					System.out.print(board[i][j] + "  ");
+				}
+			}
+			System.out.println();
+		}
+		
+		System.out.println("________");		
+	}
+
+}

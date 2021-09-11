@@ -1,0 +1,71 @@
+package inf101.v20.sem2.example.GUI;
+
+import java.util.Scanner;
+
+import inf101.v20.sem2.game.TicTacToe;
+
+public class GUIMain {
+
+	public static void main(String[] args) {
+		
+		//GameGUI.run( () -> null); 
+		
+		boolean isReady = false;
+		System.out.println("Welcome! Type 1 for singleplayer, or 2 for multiplayer: ");
+		Scanner type = new Scanner(System.in);
+		int numPlayers = type.nextInt();
+		
+		//If condition that checks how many players there are, and what there usernames are
+		if(numPlayers == 1) {
+			System.out.println("Enter your username: ");
+			Scanner username = new Scanner(System.in);
+			String player1 = username.nextLine();
+			System.out.println("Hi there " + player1 + " <3");
+		}
+		else if (numPlayers == 2) {
+			System.out.println("Enter player 1 username: ");
+			Scanner username = new Scanner(System.in);
+			String player1 = username.nextLine();
+			
+			System.out.println("Enter player 2 username: ");
+			String player2 = username.nextLine();
+			
+			System.out.println("Hi there " + player1 + " and " + player2 + " <3");
+		}
+		
+		String infoMsg = "Type in 1 to play Tic Tac Toe, or 2 to play Connect 4: ";
+		System.out.println(infoMsg);
+		//While loop that keeps running as long as enough information to start the game is NOT collected
+		while(!isReady) {
+			Scanner input = new Scanner(System.in);
+			int gameID = input.nextInt();
+			
+			//If condition that checks what game the player(s) wants to play, and runs the chosen game
+			if(gameID == 1) {
+				//Starts the Tic Tac Toe game
+				TicTacToe TTTGame = new TicTacToe();
+				if(numPlayers == 1) {
+					TTTGame.runSingleplayer();
+				}
+				else if(numPlayers == 2) {
+					TTTGame.runMultiplayer();
+				}
+				isReady = true;
+			}
+			else if(gameID == 2) {
+				//C4Game.run();
+				isReady = true;
+			}
+			else {
+				System.out.println("Invalid input. " + infoMsg);		}
+		}
+	}
+	
+	public String getPlayerName1() {
+		return player1;
+	}
+	
+	public String getPlayerName2() {
+		return player2;
+	}
+}

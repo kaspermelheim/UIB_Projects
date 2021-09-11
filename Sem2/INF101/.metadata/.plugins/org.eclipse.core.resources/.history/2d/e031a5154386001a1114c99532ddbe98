@@ -1,0 +1,35 @@
+package inf101.v20.sem2.game;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+class GameTest {
+
+	@Test
+	/**
+	 * Checks if a pos on the board is taken
+	 */
+	void cantPlaceTestTTT() {
+		TicTacToe TTT = new TicTacToe();
+		TTT.player1Placements.add(3);
+		
+		assertFalse(TTT.canPlace(3));
+	}
+	
+	void canPlaceTestC4() {
+		
+	}
+	
+	void canWinTestTTT() {
+		
+	}
+	
+	void canWinTestC4() {
+		
+	}
+}
+

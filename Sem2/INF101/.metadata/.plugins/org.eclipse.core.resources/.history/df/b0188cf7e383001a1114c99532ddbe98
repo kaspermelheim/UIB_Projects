@@ -1,0 +1,265 @@
+package inf101.v20.sem2.game;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+import inf101.v20.sem2.board.Board;
+
+public class TicTacToe extends Game{
+	
+	final int height = 3;
+	final int width = 3;
+	int totalMoves = 1;
+	int[][] board;
+	
+	List<Integer> player1Placements = new ArrayList<>();
+	List<Integer> player2Placements = new ArrayList<>();
+	
+	public TicTacToe() {
+		board = new int[height][width];
+		totalMoves = 0;
+	}
+	
+	public void runMultiplayer() throws IOException {
+		
+		System.out.println("Welcome to TicTacToe! Type 1 to place in upper left corner, 2 for top row middle etc.");
+		
+		createBoard();
+		
+		Scanner playerInput = new Scanner(new InputStreamReader(System.in));
+		
+		mainLoop:
+			while(true) {
+				//Player1
+				while(true) {
+					System.out.println("Player 1 placement:");
+					int pos = Integer.parseInt(playerInput.nextLine());
+					
+					if(canPlace(pos)) {
+						if(place(pos, 1)) {
+							createBoard();
+							System.out.println("Game over. Player 1 wins!");
+							break mainLoop;
+						}
+						break;
+					}
+					else {
+						System.out.println("Cell " + pos + " already taken! Choose new cell: ");
+					}
+				}
+				createBoard();
+				
+				//Player 2
+					while(true) {
+						System.out.println("Player 2 placement:");
+						int pos = Integer.parseInt(playerInput.nextLine());
+						
+						if(canPlace(pos)) {
+							if(place(pos, 2)) {
+								createBoard();
+								System.out.println("Game over. Player 2 wins!");
+								break mainLoop;
+							}
+							break;
+						}
+						else {
+							System.out.println("Cell " + pos + " already taken! Choose new cell: ");
+						}
+					}
+					createBoard();
+					
+					if(isFull()) {
+						System.out.println("Its a draw.");
+						break;
+					}
+			}
+	}
+	
+	public void runSingleplayer() throws IOException {
+
+		System.out.println("Welcome to TicTacToe! Type 1 to place in upper left corner, 2 for top row middle etc.");
+		createBoard();
+		
+		Scanner playerInput = new Scanner(new InputStreamReader(System.in));
+		
+		mainLoop:
+			while(true) {
+				//Player1
+				while(true) {
+					System.out.println("Player 1 placement:");
+					int pos = Integer.parseInt(playerInput.nextLine());
+					
+					if(canPlace(pos)) {
+						if(place(pos, 1)) {
+							createBoard();
+							System.out.println("Game over. Player 1 wins!");
+							break mainLoop;
+						}
+						break;
+					}
+					else {
+						System.out.println("Cell " + pos + " already taken! Choose new cell: ");
+					}
+				}
+				createBoard();
+				
+				//CPU
+					while(true) {
+						int pos = getRandomNumber(width);
+						
+						if(canPlace(pos)) {
+							if(place(pos, 2)) {
+								createBoard();
+								System.out.println("Game over. CPU wins!");
+								break mainLoop;
+							}
+							break;
+						}
+						else {
+							System.out.println("");
+						}
+					}
+					createBoard();
+					
+					if(isFull()) {
+						System.out.println("Its a draw.");
+						break;
+					}
+			}
+	}
+
+	public int getRandomNumber(int width) {
+		Random random = new Random();
+		int num = random.ints(1, 1, 10).findFirst().getAsInt();
+		
+		return num;	
+	}
+	
+	public boolean place(int placement, int playerNum) {
+			
+		if(playerNum == 1) {
+			player1Placements.add(placement);
+		}
+		else if(playerNum == 2) {
+			player2Placements.add(placement);
+		}
+		
+		switch(placement) {
+		case 1:
+			board[0][0] = playerNum;
+			break;
+		case 2:
+			board[0][1] = playerNum;
+			break;
+		case 3:
+			board[0][2] = playerNum;
+			break;
+		case 4:
+			board[1][0] = playerNum;
+			break;
+		case 5:
+			board[1][1] = playerNum;
+			break;
+		case 6:
+			board[1][2] = playerNum;
+			break;
+		case 7:
+			board[2][0] = playerNum;
+			break;
+		case 8:
+			board[2][1] = playerNum;
+			break;
+		case 9:
+			board[2][2] = playerNum;
+			break;
+	}
+		
+		totalMoves++;
+		return checkVictory(0, 0);
+	}
+	
+	public boolean canPlace(int pos) {
+		
+		if(player2Placements.contains(pos) || player1Placements.contains(pos)) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean isFull() {
+		return totalMoves == height * width;
+	}
+	
+	/**
+	 * Method that returns a list of the win conditions
+	 * @return List
+	 */
+	public List getVictoryConditions() {
+
+		ArrayList<List> victoryTriggers = new ArrayList<>();
+		
+		List leftCol = Arrays.asList(1, 4, 7);
+		List rightCol = Arrays.asList(3, 6, 9);
+		List midCol = Arrays.asList(2, 5, 8);
+		List topRow = Arrays.asList(1, 2, 3);
+		List midRow = Arrays.asList(4, 5, 6);
+		List botRow = Arrays.asList(7, 8, 9);
+		List leftDiag = Arrays.asList(1, 5, 9);
+		List rightDiag = Arrays.asList(3, 5, 7);
+		
+		victoryTriggers.add(leftCol);
+		victoryTriggers.add(rightCol);
+		victoryTriggers.add(midCol);
+		victoryTriggers.add(topRow);
+		victoryTriggers.add(midRow);
+		victoryTriggers.add(botRow);
+		victoryTriggers.add(leftDiag);
+		victoryTriggers.add(rightDiag);
+		
+		return victoryTriggers;
+		
+	}
+
+	public boolean checkVictory(int x, int y) {
+		
+		ArrayList<List> victoryTriggers = (ArrayList<List>) getVictoryConditions();
+		
+		for(List trigger : victoryTriggers) {
+			if(player1Placements.containsAll(trigger)) {
+				//Player 1 wins
+				return true;
+			}
+			else if(player2Placements.containsAll(trigger)) {
+				//Player 2 wins
+				return true;
+			}
+		}
+		return false;
+    }
+
+	public void createBoard() {
+		
+		System.out.println("________");
+
+		for(int i = 0; i < board.length; i++) {
+			
+			for(int j = 0; j < board[0].length; j++) {
+				
+				if(board[i][j] == 0) {
+					System.out.print("-  ");
+				}
+				else {
+					System.out.print(board[i][j] + "  ");
+				}
+			}
+			System.out.println();
+		}
+		
+		System.out.println("________");		
+	}	
+}

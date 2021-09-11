@@ -1,0 +1,10 @@
+package inf101.v20.sem2.game;
+
+public interface IGame {
+
+	checkVictory();
+	
+	place();
+	
+	updateBaord();
+}

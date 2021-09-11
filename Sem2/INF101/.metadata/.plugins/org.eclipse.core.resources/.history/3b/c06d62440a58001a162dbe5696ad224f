@@ -1,0 +1,5 @@
+package inf101.v20.rogue101.objects;
+
+public class Gold implements IItem{
+
+}

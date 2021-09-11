@@ -1,0 +1,150 @@
+Ukeoppgave 3
+
+CREATE TABLE Countries(
+Name varchar (20),
+Area INT,
+Capital_city varchar (20),
+CONSTRAINT Countries_PK PRIMARY KEY (Name)
+);
+CREATE TABLE Cities(
+Name varchar (20),
+Area INT,
+Country varchar (20),
+CONSTRAINT Cities_PK PRIMARY KEY (Name),
+CONSTRAINT Cities_FK FOREIGN KEY (Country) REFERENCES Countries(Name)
+);
+CREATE TABLE Population(
+Name varchar (20),
+Year smallint,
+Number INT,
+CONSTRAINT population_PK PRIMARY KEY (Name, Year),
+CONSTRAINT population_FK1 FOREIGN KEY (Name) REFERENCES Countries(Name)
+);
+CREATE TABLE Border(
+Country1 varchar (20),
+Country2 varchar (20),
+CONSTRAINT Border_PK PRIMARY KEY (Country1, Country2),
+CONSTRAINT Border_FK1 FOREIGN KEY (Country1) REFERENCES Countries(Name),
+CONSTRAINT Border_FK2 FOREIGN KEY (Country2) REFERENCES Countries(Name)
+);
+INSERT INTO Countries (Name, Area, Capital_city) VALUES ('Norway', 385178,
+'Oslo');
+INSERT INTO Countries (Name, Area, Capital_city) VALUES ('Sweden', 450295,
+'Stockholm');
+INSERT INTO Countries (Name, Area, Capital_city) VALUES ('Finland', 338424,
+'Helsinki');
+INSERT INTO Countries (Name, Area, Capital_city) VALUES ('Russia', 17098242,
+'Moscow');
+INSERT INTO Countries (Name, Area, Capital_city) VALUES ('Iceland', 102775,
+'Reykjav√k');
+INSERT INTO Cities (Name, Area, Country) VALUES ('Oslo', 480, 'Norway');
+INSERT INTO Cities (Name, Area, Country) VALUES ('Stockholm', 188, 'Sweden');
+INSERT INTO Cities (Name, Area, Country) VALUES ('Helsinki', 715, 'Finland');
+INSERT INTO Cities (Name, Area, Country) VALUES ('Moscow', 2511, 'Russia');
+INSERT INTO Cities (Name, Area, Country) VALUES ('Reykjav√k', 273, 'Iceland');
+INSERT INTO Population (Name, Year, Number) VALUES ('Norway', '2015', 5166000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Norway', '2000', 4478000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Norway', '1980', 4091000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Sweden', '2015', 9802000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Sweden', '2000', 8861000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Sweden', '1980', 8318000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Finland', '2015', 5486000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Finland', '2000', 5171000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Finland', '1980', 4771000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Russia', '2015',
+143976000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Russia', '2000', 
+146597000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Russia', '1980',
+138483000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Iceland', '2015', 329000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Iceland', '2000', 318000);
+INSERT INTO Population (Name, Year, Number) VALUES ('Iceland', '1980', 254000);
+INSERT INTO Border (Country1, Country2) VALUES ('Norway', 'Sweden');
+INSERT INTO Border (Country1, Country2) VALUES ('Norway', 'Russia');
+INSERT INTO Border (Country1, Country2) VALUES ('Norway', 'Finland');
+INSERT INTO Border (Country1, Country2) VALUES ('Sweden', 'Norway');
+INSERT INTO Border (Country1, Country2) VALUES ('Sweden', 'Finland');
+INSERT INTO Border (Country1, Country2) VALUES ('Finland', 'Norway');
+INSERT INTO Border (Country1, Country2) VALUES ('Finland', 'Sweden');
+INSERT INTO Border (Country1, Country2) VALUES ('Finland', 'Russia');
+INSERT INTO Border (Country1, Country2) VALUES ('Russia', 'Norway');
+INSERT INTO Border (Country1, Country2) VALUES ('Russia', 'Finland');
+
+------------------------------------------------------------------------
+
+1a)
+SELECT * FROM cities HAVING area < 2000 ORDER BY area DESC;
+
+b)
+SELECT DISTINCT Country1 FROM border GROUP BY Country2 HAVING COUNT(*) > 2 ORDER BY Country1 DESC;
+
+c)
+//SELECT P.* FROM population AS P JOIN countries AS C on C.Name = P.Name HAVING P.Year = 1980 ORDER BY C.Area
+
+SELECT population.*, countries.Area FROM population JOIN countries on countries.Name = population.Name HAVING population.Year = 1980 ORDER BY countries.Area DESC
+
+d)
+//SELECT cities.Name, cities.Country, countries.Name, population.Year, population.Number FROM cities, countries JOIN population on population.Name = countries.Name 
+//WHERE population.Year = 2000 AND population.Number < 5000000 AND cities.Country = countries.Name ORDER BY population.Number DESC
+
+Bedre l¯sning:
+
+SELECT
+  t3.Name
+FROM
+  countries t1 
+  INNER JOIN population t2 ON t2.Name = t1.Name
+  INNER JOIN cities t3 ON t3.Country = t1.Name
+WHERE 
+t2.Year = 2000 AND t2.Number < 5000000 AND t3.Country = t1.Name 
+ORDER BY t2.Number DESC
+
+e)
+
+//SELECT countries.Name, (countries.Area / population.Number) AS Density
+//FROM countries
+//INNER JOIN population on population.Name = countries.Name
+//WHERE population.Year = 2015
+//GROUP BY countries.Name
+
+Bedre l¯sning:
+
+SELECT c.Name, (c.Area / p.Number) AS Density
+FROM countries c 
+INNER JOIN population p ON p.Name = c.Name
+WHERE p.Year = 2015
+GROUP BY c.Name
+ORDER BY Density DESC
+
+2a)
+
+UPDATE flights
+SET Arrival_time = "15:30:00"
+WHERE Company_code = "SK" AND Serial_number = 835;
+
+b)
+
+INSERT INTO flights
+VALUES("LH", 310, 1, "10:15:00", 2, "12:15:00")
+
+c)
+
+SELECT * FROM flights
+WHERE Company_code = "SK" AND Arrival_location = 1
+
+d)
+
+SELECT a.Name 
+FROM airport a
+JOIN flights f ON f.Arrival_location = a.Airport_No 
+JOIN company c ON c.Airline_code = f.Company_code 
+WHERE c.Airline_code = "DY"
+
+e)
+
+SELECT DISTINCT c.Name 
+FROM company c
+JOIN flights f ON f.Company_code = c.Airline_code 
+JOIN airport a ON a.Airport_No = f.Departure_location 
+WHERE a.Name = "Charles de Gaulle";

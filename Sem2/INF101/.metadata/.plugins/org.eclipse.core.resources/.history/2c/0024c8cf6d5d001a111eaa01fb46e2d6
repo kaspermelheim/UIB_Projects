@@ -1,0 +1,68 @@
+package inf101.v20.rogue101.objects;
+
+import inf101.v20.gfx.textmode.BlocksAndBoxes;
+import inf101.v20.rogue101.RogueApplication;
+
+public class Gold implements IItem{
+
+	/**
+	 * char representation of this type 
+	 */
+	public static final char SYMBOL = 'G';
+	private int hp = getMaxHealth();
+
+	@Override
+	public String getArticle() {
+		return "";
+	}
+	
+	@Override
+	public int getCurrentHealth() {
+		return hp;
+	}
+
+	@Override
+	public int getDefence() {
+		return 10;
+	}
+
+	@Override
+	public int getMaxHealth() {
+		return 10;
+	}
+
+	@Override
+	public String getShortName() {
+		return "gold";
+	}
+	
+	@Override
+	public String getLongName() {
+		return "divine gold";
+	}
+
+	@Override
+	public int getSize() {
+		return 2;
+	}
+
+	@Override
+	public String getGraphicTextSymbol() {
+		if (RogueApplication.USE_EMOJI) {
+			return "💰"; 
+		} else {
+			return "" + SYMBOL;
+		}	
+	}
+
+	@Override
+	public int handleDamage(int amount) {
+		return 0;
+	}
+	
+	@Override
+	public char getSymbol() {
+		return SYMBOL;
+	}
+
+}

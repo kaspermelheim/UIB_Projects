@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract local variable &apos;iterator&apos; from expression &apos;(Iterator&lt;Clothing&gt;)new Drawer()&apos;&#x0D;&#x0A;- Original project: &apos;inf101.v20.lab5&apos;&#x0D;&#x0A;- Variable name: &apos;iterator&apos;&#x0D;&#x0A;- Destination method: &apos;inf101.v20.lab5.furniture.component.Drawer.iterator()&apos;&#x0D;&#x0A;- Variable expression: &apos;(Iterator&lt;Clothing&gt;)new Drawer()&apos;&#x0D;&#x0A;- Replace occurrences of expression with variable" description="Extract local variable &apos;iterator&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;inf101.v20.lab5.furniture.component{Drawer.java" name="iterator" replace="true" selection="1676 33" stamp="1584290851867" varType="false" version="1.0"/>
+</session>

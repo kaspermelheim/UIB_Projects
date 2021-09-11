@@ -1,0 +1,42 @@
+package inf101.v20.rogue101.game;
+
+import inf101.v20.rogue101.objects.Amulet;
+import inf101.v20.rogue101.objects.Carrot;
+import inf101.v20.rogue101.objects.Dust;
+import inf101.v20.rogue101.objects.Gold;
+import inf101.v20.rogue101.objects.IItem;
+import inf101.v20.rogue101.objects.Player;
+import inf101.v20.rogue101.objects.Portal;
+import inf101.v20.rogue101.objects.Rabbit;
+import inf101.v20.rogue101.objects.Spider;
+import inf101.v20.rogue101.objects.Wall;
+
+public class ItemFactory {
+
+	public static IItem createItem(char symbol) {
+		switch(symbol) {
+		case Wall.SYMBOL:
+			return new Wall();
+		case Rabbit.SYMBOL:
+			return new Rabbit();
+		case Carrot.SYMBOL:
+			return new Carrot();
+		case Player.SYMBOL:
+			return new Player();
+		case Spider.SYMBOL:
+			return new Spider();
+		case Dust.SYMBOL:
+			return new Dust();
+		case Gold.SYMBOL:
+			return new Gold();
+		case 'A':
+			return Amulet.getInstance();
+		case Portal.SYMBOL:
+			return new Portal();
+		case ' ':
+			return null;
+		default : 	
+			throw new IllegalArgumentException("createItem: Don't know how to create a '" + symbol + "'");
+		}
+	}
+}

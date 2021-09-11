@@ -1,0 +1,101 @@
+DAT103 - Oblig 1
+
+#1
+
+ls -a -l -h
+ls -alh
+
+ls: list computer files
+= -a: list all files including hidden file starting with '.'
+= -l: list with long format - show permissions
+= -lh: list long format with readable file size
+
+mkdir tmp = oppretter filen "tmp"
+echo "En fil" > bb.txt = oppretter bb.txt med innhold "En fil"
+cat bb.txt = printer "En fil"
+
+ls aa.txt bb.txt = printer ut filnavnet på begge filene
+ls -l aa.txt bb.txt = printer ut long format, mer info, om begge filene 
+ls -l *.txt = printer ut long format, mer info, om alle filene i folderen
+
+#Dette er en kommentar i unix
+
+Unix er case sensitive, ls =/= LS
+
+ged<TAB> = gedit (command for å åpne text editor i unix)
+ged<TAB> a<TAB> = åpner aa.txt
+man<TAB><TAB> = printer "man 	mandb	 manpath"
+
+man = viser manual
+echo $VARIABELNAVN = printer ut innholdet av variabelen VARIABELNAVN
+echo $SHELL = bin/bash
+
+date = prints current date
+date +"%A" = prints current day (tuesday)
+cal = prints calendar
+
+cd .. = går til parent folder, en folder tilbake
+pwd = prints current working directory, /home
+cd ../..
+pwd
+cd .././..
+pwd
+cd /usr/local = går til /usr/local
+pwd
+ls = printer ut innhold i current directory
+
+#2
+
+1. pwd = printer ut navnet på directory vi befinner oss i
+2. pwd -P = skriv ut fysisk mappe, uten symbolske lenker. pwd kjører med -L som standard (fant ut av dette med "help pwd")
+3. man ls , info ls, commands som skriver ut info om ls
+4. echo printer ut det som følger i terminal, echo "Hello world!" = Hello world!
+5. 
+6. echo "Kurset heter DAT103" 
+
+#3
+
+1. mkdir = creates new folder/directory, rmdir = removes folder/directory if the folder/directory is empty^
+4. tree = printer alle foldere og respektive filer, som et tre med greiner, oversiktlig
+5. mv = brukes for å flytte filer og mapper, og gi filer og mapper nye navn, eksempel: "mv duc dub", endrer fila duc til dub.
+8. cat og more = viser innhold i fil, eksempel: "more innhold.txt" = printer ut tekst i filen
+9. ls | wc -l = teller antall filer i folder du befinner deg i
+
+#4
+
+?: Matcher ett enkelt vilkårlig tegn.
+*: Matcher ett vilkårlig antall vilkårlige tegn.
+[]: Matcher ett enkelt tegn som må være listet, f.eks.[a-z]som matcher ett enkelt tegn som kan være enbokstav fra a–z.
+
+ls fil?.txt = viser alle filer som har filX.txt i filnavnet, der X kan være et hvilket som helst tegn
+ls --*.txt = viser alle txt filer, uansett hva de heter, så lenge de har .txt på slutten
+ls fil[a13,].txt = viser filer som starter på filX og slutter på .txt, der X må være en av tegna inne i [] (a13)
+
+#5
+
+echo "Hei du?  Hvor er $HOME?" = Hei du? Hvor er /home/kasper?
+echo 'Hei du? Hvor er $HOME?' = Hei du? Hvor er $HOME?
+forskjell på " og '
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

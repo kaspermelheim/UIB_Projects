@@ -1,0 +1,205 @@
+Oblig 1
+Kasper Melheim - individuell
+
+#15
+
+Kildekode i shell script:
+
+---------------------------------
+
+#!/bin/bash
+for (( i=1; i <= $1; ++i ))
+do
+  echo $2
+done
+
+---------------------------------
+Resultat:
+---------------------------------
+
+./repeter.sh 5 "Denne skal repetere"
+>
+Denne skal repetere
+Denne skal repetere
+Denne skal repetere
+Denne skal repetere
+Denne skal repetere
+
+---------------------------------
+
+#16
+
+Kildekode i shell script:
+
+---------------------------------
+
+#!/bin/bash
+declare fil=$1
+declare -i tid=$2
+declare exist=0
+if [[ -e "$fil" ]]
+then
+    exist=1
+    declare check=$(date +%s%N --reference $fil)
+else
+    exist=0
+fi
+while true
+do
+    if [[ -e "$fil" ]]
+    then
+	    if [ $exist == 0 ]
+	    then
+	       echo "Filen $fil ble opprettet."
+	       exist=1
+	       break
+	    fi
+	    if [[ $(date +%s%N --reference $fil) != $check ]]
+	    then
+	       check=$(date +%s%N --reference $fil)
+	       echo "Filen $fil ble endret."
+	       break
+	    fi
+	    else
+	    if [ $exist == 1 ]
+	    then
+	       echo "Filen $fil ble slettet."
+	       exist=0
+	       break
+	    fi
+    fi
+    sleep $tid
+done
+
+---------------------------------
+Resultat:
+---------------------------------
+Anta at filen ikke eksisterer. Kjør kode:
+
+chmod u+x filkontroll.sh
+./filkontroll.sh testfil 3
+Vi opretter så filen testfil.
+>Filen testfil ble opprettet.
+(filen er nå opprettet og programmet blir stoppet)
+
+./filkontroll.sh testfil 3
+> (Venter på at filen enten skal bli slettet eller endret, sjekker i tidsintervall på 3 sek)
+Dersom filen blir slettet:
+> Filen testfil har blitt slettet.
+(filen ble slettet og programmet blir stoppet)
+
+Dersom filen ble endret på:
+> Filen testfil har blitt endret.
+(filen eksisterer fortsatt men har blitt endret, og programmet blir stoppet.)
+
+---------------------------------
+
+#17
+
+Kildekode i shell script:
+
+---------------------------------
+
+#!/bin/bash
+for file in "$@"
+do  
+  ./filkontroll.sh "$file" 60 &
+
+done
+
+wait
+
+---------------------------------
+Resultat:
+---------------------------------
+
+./kontrollflerefiler.sh test test1 test2
+Dette vil overvåke alle 3 filene for endringer samtidig, hvert minutt,
+og stoppe programmet dersom alle filene har fått endringer.
+
+---------------------------------
+
+#18
+
+Kildekode i shell script:
+
+---------------------------------
+#!/bin/bash
+sum=0
+finished=false
+while [ ${finished} ]
+do
+  printf 'Skriv nr.: '
+  read -r num
+  if [ -z "$num" ] #om $num er tom betyr det at vi har sendt et tomt input, 				ctrl+d gjør nettopp dette, hopper videre til neste 				input i iterasjonen, som betyr at den setter $num= tom 				variabel
+  then
+    echo $sum
+    finished=true
+    exit
+  fi
+  sum=$((sum + num))
+done
+
+---------------------------------
+Resultat:
+---------------------------------
+./summer.sh
+>Skriv nr.: 1 <Enter>
+>Skriv nr.: 2 <Enter>
+>Skriv nr.: 3 <Enter>
+>Skriv nr.: <Ctrl + D> #Ctrl + D på egen linje
+>5
+
+---------------------------------
+
+#19
+
+Kildekode i shell script:
+
+---------------------------------
+hendelse.logg ser sånn ut:
+---------------------------------
+
+CallTilEdb 8
+CallCustomer 9
+CallTilEdb 4
+CustomerChk 10
+CustomerChk 15
+CallTilEdb 16
+
+---------------------------------
+vistid.sh ser sånn ut:
+---------------------------------
+
+#!/bin/bash
+#Bruker ALLVALUES for å splitte opp ord på linjer i en fil, kan på denne 
+#måten manipulere orda og søke etter det vi vil ha
+
+declare file="$1"
+declare -t num=0
+printf 'Hva er hendelsen? '
+read -r hen
+ALLVALUES=()
+while IFS= read -r linje
+do
+  ALLVALUES+=( $linje )
+  if [ ${ALLVALUES[0]} == $hen ]
+  then
+    num=$((num + ${ALLVALUES[1]}))
+  fi
+  ALLVALUES=()
+done < "$file"
+echo $num
+
+---------------------------------
+Resultat:
+---------------------------------
+chmod u+x hendelse.logg
+chmod u+x vistid.sh
+./vistid.sh hendelse.logg
+>Hva er hendelsen? CallTilEdb <enter>
+>28
+
+
+
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
+    <fullyQualifiedTypeName name="inf101.v20.lab4.grid.IGrid"/>
+    <fullyQualifiedTypeName name="inf101.v20.lab4.grid.Grid"/>
+    <fullyQualifiedTypeName name="inf101.v20.lab4.labyrinth.MovePlayerException"/>
+    <fullyQualifiedTypeName name="Innlogging_Prosjekt.LogMain"/>
+    <fullyQualifiedTypeName name="Innlogging_Prosjekt.Log"/>
+    <fullyQualifiedTypeName name="java.io.FileReader"/>
+    <fullyQualifiedTypeName name="java.io.FileWriter"/>
+    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="java.io.BufferedWriter"/>
+    <fullyQualifiedTypeName name="com.sun.jdi.connect.spi.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.Statement"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="Lecture11.DNAgenerator"/>
+    <fullyQualifiedTypeName name="com.sun.tools.javac.util.List"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="Lecture11.DNA"/>
+    <fullyQualifiedTypeName name="java.util.Iterator"/>
+    <fullyQualifiedTypeName name="Lecture13.Range"/>
+    <fullyQualifiedTypeName name="inf101.v20.grid.GridDirection"/>
+    <fullyQualifiedTypeName name="inf101.v20.rogue101.objects.Gold"/>
+    <fullyQualifiedTypeName name="inf101.v20.rogue101.objects.Spider"/>
+    <fullyQualifiedTypeName name="inf101.v20.rogue101.map.GameMap"/>
+    <fullyQualifiedTypeName name="inf101.v20.grid.ILocation"/>
+    <fullyQualifiedTypeName name="inf101.v20.gfx.textmode.Printer"/>
+    <fullyQualifiedTypeName name="javafx.scene.paint.Color"/>
+    <fullyQualifiedTypeName name="inf101.v20.rogue101.RogueApplication"/>
+    <fullyQualifiedTypeName name="inf101.v20.lab5.item.Clothing"/>
+    <fullyQualifiedTypeName name="inf101.v20.lab7.datastructure.Storage"/>
+    <fullyQualifiedTypeName name="inf101.v20.lab7.item.Clothing"/>
+    <fullyQualifiedTypeName name="inf101.v20.sem2.example.GUI.GameGUI"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.io.BufferedReader"/>
+    <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="inf101.v20.sem2.game.TicTacToeTest"/>
+    <fullyQualifiedTypeName name="inf101.v20.lab4.grid.Board"/>
+    <fullyQualifiedTypeName name="inf101.v20.sem2.game.TicTacToe"/>
+    <fullyQualifiedTypeName name="inf101.v20.sem2.game.Connect4"/>
+</qualifiedTypeNameHistroy>

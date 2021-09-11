@@ -1,0 +1,59 @@
+package inf101.v20.rogue101.objects;
+
+public class Gold implements IItem{
+
+	@Override
+	public int getCurrentHealth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getDefence() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getMaxHealth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getLongName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getShortName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getGraphicTextSymbol() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int handleDamage(int amount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public char getSymbol() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

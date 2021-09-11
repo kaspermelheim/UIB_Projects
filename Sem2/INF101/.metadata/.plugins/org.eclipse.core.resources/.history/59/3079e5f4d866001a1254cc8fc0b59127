@@ -1,0 +1,91 @@
+package inf101.v20.lab5.furniture.component;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import inf101.v20.lab5.datastructure.Storage;
+import inf101.v20.lab5.item.Clothing;
+import inf101.v20.lab5.item.Clothing.ClothingType;
+
+/**
+ * A drawer to store clothes in. Drawers can only contain clean clothing and can not be used for shoes.  
+ * 
+ * @author anna
+ *
+ */
+public class Drawer implements Storage{
+	
+	private List<Clothing> clothes;
+
+	public Drawer() {
+		clothes = new ArrayList<Clothing>();
+	}
+
+	@Override
+	public boolean add(Clothing item) {
+		
+		if(!canAdd(item)) {
+			throw new IllegalArgumentException("Clothing doesnt fullfil requirements.");
+		}
+		if(item == null) {
+			throw new NullPointerException("Item cannot be null.");
+		}
+		
+		clothes.add(item);
+		return true;
+	}
+	
+	@Override
+	public boolean has(Clothing item) {
+		for(Clothing item1 : clothes) {
+			if(item1.equals(item)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean canAdd(Clothing item) {
+		if(item.isDirty()) {
+			return false;
+		}
+		if(item.getType().equals(ClothingType.SHOES)) {
+			return false;
+		}
+		if(item == null)
+		return true;
+	}
+
+	@Override
+	public boolean remove(Clothing item) {
+		//TODO 5.1) 
+		if(clothes.isEmpty()) {
+			throw new NoSuchElementException("Drawer is empty.");
+		}
+		
+		if(clothes.contains(item)) {
+			clothes.remove(item);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public Iterator<Clothing> iterator() {
+		//TODO 5.1) 
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder s = new StringBuilder();
+		s.append("Drawer [\n");
+		clothes.forEach(i -> s.append((i.toString()+"\n")));
+		s.append("]");
+		return s.toString();
+	}
+}

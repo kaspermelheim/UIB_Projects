@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="GameTest" project="inf101.v20.sem2" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="inf101.v20.sem2.game.GameTest" time="0.021" displayname="GameTest" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]">
+    <testcase name="cantPlaceTestTTT" classname="inf101.v20.sem2.game.GameTest" time="0.013" displayname="cantPlaceTestTTT()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]/[method:cantPlaceTestTTT()]"/>
+    <testcase name="canWinTestTTT" classname="inf101.v20.sem2.game.GameTest" time="0.002" displayname="canWinTestTTT()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]/[method:canWinTestTTT()]"/>
+    <testcase name="cantPlaceTestC4" classname="inf101.v20.sem2.game.GameTest" time="0.006" displayname="cantPlaceTestC4()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.game.GameTest]/[method:cantPlaceTestC4()]"/>
+  </testsuite>
+</testrun>

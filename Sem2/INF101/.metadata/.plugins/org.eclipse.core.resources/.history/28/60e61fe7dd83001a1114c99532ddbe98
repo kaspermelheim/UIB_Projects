@@ -1,0 +1,12 @@
+package board;
+
+public interface IBoard {
+
+	public void createBoard();
+	
+	public boolean isFull();
+	
+	public int getHeight();
+	
+	public int getWidth();
+}

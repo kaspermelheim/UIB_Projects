@@ -1,0 +1,59 @@
+package inf101.v20.rogue101.objects;
+
+import inf101.v20.gfx.textmode.BlocksAndBoxes;
+
+public class Gold implements IItem{
+
+	public static final char SYMBOL = '.';
+
+	@Override
+	public String getArticle() {
+		return "";
+	}
+	
+	@Override
+	public int getCurrentHealth() {
+		return 1;
+	}
+
+	@Override
+	public int getDefence() {
+		return 0;
+	}
+
+	@Override
+	public int getMaxHealth() {
+		return 1;
+	}
+
+	@Override
+	public String getShortName() {
+		return "dust";
+	}
+	
+	@Override
+	public String getLongName() {
+		return "lots of dust";
+	}
+
+	@Override
+	public int getSize() {
+		return 100;
+	}
+
+	@Override
+	public String getGraphicTextSymbol() {
+		return BlocksAndBoxes.BLOCK_HALF;
+	}
+
+	@Override
+	public int handleDamage(int amount) {
+		return 0;
+	}
+	
+	@Override
+	public char getSymbol() {
+		return SYMBOL;
+	}
+
+}

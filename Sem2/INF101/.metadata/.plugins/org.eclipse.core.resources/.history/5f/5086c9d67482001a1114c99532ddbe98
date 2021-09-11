@@ -1,0 +1,75 @@
+package inf101.v20.sem2.game;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Connect4 implements IGame {
+	
+	final int height = 8;
+	final int width = 8;
+	int totalMoves;
+	int[][] board;
+	
+	public Connect4() {
+		board = new int[height][width];
+		totalMoves = 0;
+	}
+	
+	public static void main(String args[]) throws IOException {
+		Connect4 C4Game = new Connect4();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Welcome to C4!");
+		
+		outer:
+			while(true) {
+				int column = 0;
+				//Player1
+				while(true) {
+					System.out.println("Player 1 play:");
+					column = Integer.parseInt(br.readLine());
+				}
+			}
+	}
+
+	@Override
+	public String checkVictory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void place(String participant, int placement, char[][] board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateBoard(char[][] board) {
+
+		for(int = 0; i < board.length; i++) {
+			
+			for(int j = 0; j < board[0].length; j++) {
+				
+				if(board[i][j]) == 0) {
+					System.out.println(board[i][j] + "  ");
+				}
+			}
+		}
+		
+	}
+
+	@Override
+	public void runSingleplayer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void runMultiplayer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+}

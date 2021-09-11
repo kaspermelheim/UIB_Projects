@@ -1,0 +1,65 @@
+package inf101.v20.lab5.furniture.component;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import inf101.v20.lab5.datastructure.Storage;
+import inf101.v20.lab5.furniture.component.Shelf;
+import inf101.v20.lab5.item.Clothing;
+import inf101.v20.lab5.item.Clothing.ClothingType;
+
+/**
+ * A shelf to store clothes in. Drawers can only contain clean clothing and can not be used for socks.
+ * 
+ * @author anna
+ *
+ */
+public class Shelf implements Storage{
+
+	private List<Clothing> clothes;
+
+	public Shelf() {
+		clothes = new ArrayList<Clothing>();
+	}
+
+	@Override
+	public boolean add(Clothing item) {
+		//TODO 5.2)
+		return false;
+	}
+	
+	@Override
+	public boolean has(Clothing item) {
+		//TODO 5.2)
+		return false; 
+	}
+
+	@Override
+	public boolean canAdd(Clothing item) {
+		//TODO 5.2)
+		return false;
+	}
+
+	@Override
+	public boolean remove(Clothing item) {
+		//TODO 5.2)
+		return false;
+	}
+
+	@Override
+	public Iterator<Clothing> iterator() {
+		//TODO 5.2)
+		return null;
+	}
+	
+	@Override
+	public String toString() {
+		final StringBuilder s = new StringBuilder();
+		s.append("Shelf [\n");
+		clothes.forEach(i -> s.append((i.toString()+"\n")));
+		s.append("]");
+		return s.toString();
+	}
+}

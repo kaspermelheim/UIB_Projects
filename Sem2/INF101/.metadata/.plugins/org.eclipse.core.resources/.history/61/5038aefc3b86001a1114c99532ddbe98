@@ -1,0 +1,51 @@
+package inf101.v20.sem2.board;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import inf101.v20.sem2.game.Connect4;
+import inf101.v20.sem2.game.TicTacToe;
+
+class BoardTest {
+	
+	int[][] board;
+
+	@Test
+	void outOfBoundsTestTTT() {
+		TicTacToe TTT = new TicTacToe();
+		TTT.createBoard(board);
+		
+		try {
+			TTT.place(0, 1);
+			fail("Should throw exception");
+		} catch (IndexOutOfBoundsException e) {
+			;
+		}
+		try {
+			TTT.place(10, 1);
+			fail("Should throw exception");
+		} catch (IndexOutOfBoundsException e) {
+			;
+		}
+	}
+	
+	void outOfBoundsTestC4() {
+		Connect4 C4 = new Connect4();
+		C4.createBoard(board);
+		
+		try {
+			C4.place(-1, 1);
+			fail("Should throw exception");
+		} catch (IndexOutOfBoundsException e) {
+			;
+		}
+		try {
+			C4.place(8, 1);
+			fail("Should throw exception");
+		} catch (IndexOutOfBoundsException e) {
+			;
+		}
+	}
+
+}

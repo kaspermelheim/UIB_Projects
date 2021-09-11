@@ -1,0 +1,28 @@
+package inf101.v20.lab6.command;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+
+import inf101.v20.lab6.losning.system.IPrinter;
+import inf101.v20.lab6.losning.terminal.TerminalState;
+
+/**
+ * A terminal command for listing the content in current folder
+ */
+public class Exit implements ICommand {
+
+	private final IPrinter printer;
+
+	public Exit(IPrinter printer) {
+		this.printer = printer;
+
+	}
+
+	@Override
+	public void execute(String arguments, TerminalState state) {
+		printer.printLine("Bye!");
+		state.exit();
+	}
+
+}

@@ -1,0 +1,22 @@
+package Testing;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+public class ScrabbleTest {
+
+	@Test
+	void testCanMakeEksamen(){
+		assertTrue(Scrabble.canMake("SKAMENE", "EKSAMEN"));
+		assertTrue(Scrabble.canMake("skaMENE", "EKSAMEN"));
+		assertTrue(Scrabble.canMake("SKAMENE", "eksAMEN"));
+		assertTrue(Scrabble.canMake("ABC", "ABCABC"));
+	}
+
+	@Test
+	void testCanNotMakeFerie(){
+		assertFalse(Scrabble.canMake("SKAMENE", "FERIE"));
+	}
+}

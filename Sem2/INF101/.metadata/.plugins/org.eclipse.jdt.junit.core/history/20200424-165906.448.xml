@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="BoardTest" project="inf101.v20.sem2" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="inf101.v20.sem2.board.BoardTest" time="0.039" displayname="BoardTest" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.board.BoardTest]">
+    <testcase name="outOfBoundsTestTTT" classname="inf101.v20.sem2.board.BoardTest" time="0.039" displayname="outOfBoundsTestTTT()" uniqueid="[engine:junit-jupiter]/[class:inf101.v20.sem2.board.BoardTest]/[method:outOfBoundsTestTTT()]"/>
+  </testsuite>
+</testrun>

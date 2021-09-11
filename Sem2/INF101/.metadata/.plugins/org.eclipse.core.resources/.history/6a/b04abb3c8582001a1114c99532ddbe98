@@ -1,0 +1,213 @@
+package inf101.v20.sem2.game;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Connect4 {
+	
+	final int height = 8;
+	final int width = 8;
+	int totalMoves;
+	int[][] board;
+	
+	public Connect4() {
+		board = new int[height][width];
+		totalMoves = 0;
+	}
+	
+	public void runMultiplayer() throws IOException {
+		
+		updateBoard();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Welcome to C4!");
+		
+		mainLoop:
+			while(true) {
+				int column = 0;
+				//Player1
+				while(true) {
+					System.out.println("Player 1 play:");
+					column = Integer.parseInt(br.readLine());
+					
+					if(isPlayable(column)) {
+						if(playMove(column, 1)) {
+							updateBoard();
+							System.out.println("Player 1 wins!");
+							break mainLoop;
+						}
+						break;
+					}
+					else {
+						System.out.println("Column " + column + " is already full!");
+					}
+				}
+				updateBoard();
+				
+				//Player 2
+					while(true) {
+						System.out.println("Player 2 play:");
+						column = Integer.parseInt(br.readLine());
+						
+						if(isPlayable(column)) {
+							if(playMove(column, 2)) {
+								updateBoard();
+								System.out.println("Player 2 wins!");
+								break mainLoop;
+							}
+							break;
+						}
+						else {
+							System.out.println("Column " + column + " is already full!");
+						}
+					}
+					updateBoard();
+					
+					if(isFull()) {
+						System.out.println("Its a draw.");
+						break;
+					}
+			}
+	}
+
+	public String checkVictory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean playMove(int column, int playerNum) {
+		int i = 0;
+		
+		for(i = 0; i < height; i++) {
+			
+			if(board[i][column] == 1 || board[i][column] == 2) {
+				board[i-1][column] = playerNum;
+				break;
+			}
+		}
+		
+		if(i == height) {
+			board[i-1][column] = playerNum;
+		}
+		
+		totalMoves++;
+		return isConnected(i-1, column);
+	}
+	
+	public boolean isPlayable(int column) {
+		return board[0][column] == 0;
+	}
+	
+	public boolean isFull() {
+		return totalMoves == height * width;
+	}
+
+	public boolean isConnected(int x, int y) {
+
+		int num = board[x][y];
+		int count = 0;
+		int i = y;
+		
+		//Horizontal check
+		while(i < width && board[x][i] == num) {
+			count++;
+			i++;
+		}
+		
+		i = y-1;
+		while(i >= 0 && board[x][i] == num) {
+			count++;
+			i--;
+		}
+		
+		if(count == 4) {
+			return true;
+		}
+		
+		//Vertical
+		count = 0;
+		int j= x;
+		while(j < height && board[i][j] == num) {
+			count++;
+			j++;
+		}
+		
+		if(count == 4) {
+			return true;
+		}
+		
+		//Left diagonal
+		count = 0;
+		i = x;
+		j = y;
+		while(i < width && j < height && board[i][j] == num) {
+			count++;
+			i++;
+			j++;
+		}
+		
+		i = x-1;
+		j = y-1;
+		while(i >= 0 && j >= 0 && board[i][j] == num) {
+			count++;
+			i--;
+			j--;
+		}
+		
+		if(count == 4) {
+			return true;
+		}
+		
+		//Right diagonal
+		count = 0;
+		i = x;
+		j = y;
+		while(i < width && j >= height && board[i][j] == num) {
+			count++;
+			i++;
+			j++;
+		}
+		
+		if(count == 4) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	public void updateBoard() {
+
+		for(int i = 0; i < board.length; i++) {
+			
+			for(int j = 0; j < board[0].length; j++) {
+				
+				if(board[i][j] == 0) {
+					System.out.print("_  ");
+				}
+				else {
+					System.out.print(board[i][j] + "  ");
+				}
+			}
+			System.out.println();
+		}
+		
+		for(int i = 0; i < width; i++) {
+			System.out.print("*  ");
+		}
+		System.out.println();
+		
+		for(int i = 0; i < width; i++) {
+			System.out.print(i + "  ");
+		}
+		System.out.println();
+		
+	}
+
+	
+	public void runSingleplayer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+}

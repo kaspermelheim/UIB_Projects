@@ -1,0 +1,105 @@
+package inf101.v20.sem2.game;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+class GameTest {
+
+	@Test
+	/**
+	 * Checks if a pos on the board is taken
+	 */
+	void cantPlaceTestTTT() {
+		TicTacToe TTT = new TicTacToe();
+		TTT.player1Placements.add(3);
+		
+		assertFalse(TTT.canPlace(3));
+	}
+	
+	@Test
+	/**
+	 * Checks if a column on the board is taken
+	 */
+	void cantPlaceTestC4() {
+		Connect4 C4 = new Connect4();
+		C4.board[0][3] = 1;
+		assertFalse(C4.canPlace(3));
+	}
+	
+	@Test
+	/**
+	 * Checks if player can with horizontal combionation
+	 */
+	void canWinHorizontalTTT() {
+		TicTacToe TTT = new TicTacToe();
+		TTT.player1Placements.add(1);
+		TTT.player1Placements.add(2);
+		TTT.player1Placements.add(3);
+		assertTrue(TTT.checkVictory(0, 0));
+	}
+	
+	@Test
+	/**
+	 * Checks if player can with vertical combination
+	 */
+	void canWinVerticalTTT() {
+		TicTacToe TTT = new TicTacToe();
+		TTT.player1Placements.add(1);
+		TTT.player1Placements.add(4);
+		TTT.player1Placements.add(7);
+		assertTrue(TTT.checkVictory(0, 0));
+	}
+	
+	@Test
+	/**
+	 * Checks if player can with diagonal combination
+	 */
+	void canWinDiagonalTTT() {
+		TicTacToe TTT = new TicTacToe();
+		TTT.player1Placements.add(1);
+		TTT.player1Placements.add(5);
+		TTT.player1Placements.add(9);
+		assertTrue(TTT.checkVictory(0, 0));
+	}
+	
+	@Test
+	/**
+	 * Checks if player can with horizontal combionation
+	 */
+	void canWinHorizontalC4() {
+		Connect4 C4 = new Connect4();
+		for(int i = 0; i < 3; i++) {
+			C4.place(3, 1);
+		}
+		assertTrue(C4.place(4, 1));
+	}
+	
+	@Test
+	/**
+	 * Checks if player can with vertical combination
+	 */
+	void canWinVerticalC4() {
+		TicTacToe TTT = new TicTacToe();
+		TTT.player1Placements.add(1);
+		TTT.player1Placements.add(4);
+		TTT.player1Placements.add(7);
+		assertTrue(TTT.checkVictory(0, 0));
+	}
+	
+	@Test
+	/**
+	 * Checks if player can with diagonal combination
+	 */
+	void canWinDiagonalc4() {
+		TicTacToe TTT = new TicTacToe();
+		TTT.player1Placements.add(1);
+		TTT.player1Placements.add(5);
+		TTT.player1Placements.add(9);
+		assertTrue(TTT.checkVictory(0, 0));
+	}
+}
+
