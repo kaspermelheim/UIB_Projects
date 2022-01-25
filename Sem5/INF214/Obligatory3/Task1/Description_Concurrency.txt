@@ -1,0 +1,7 @@
+Description of concurrency classes/features in task 1:
+
+In MatrixMult we have the multiply() method, that creates a thread for each iteration in the for loop, 
+this happens because we want to run these concurrently. We also add it to the list of threads to keep track.
+
+In waitForThread(), we use thread.join(), if this operation is interrupted we will throw an error. 
+When .join() is called the thread goes into a waiting stage, and it will keep waiting until the thread terminates.

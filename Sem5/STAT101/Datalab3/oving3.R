@@ -1,0 +1,29 @@
+1:10
+10:1
+rep(1:2,5)
+rep("Red",5)
+c(rep("Red",5),rep("Blue",5))
+
+sample(1:12,4) # Velger et tilfeldig utvalg p˚a 4 fra 1,2,...,12.
+sample(1:12) # Permuterer tallene 1,2,...,12.
+sample(c(rep("Red",5),rep("Blue",5))) #Permuterer strengene "Red" og "Blue"
+
+data <- read.table("fb2m.txt", header = TRUE)
+summary(data)
+
+plot(data$alder, data$respons, xlab="Alder", ylab="Respons")
+
+behandling <- rep(c("Placebo","FB2M"), each = 15)
+behandling <- factor(behandling)
+data$behandling <- behandling
+
+boxp = boxplot(respons ~ behandling, data=data)
+
+data$randomisering <- sample(data$behandling)
+randomisering = data$randomisering
+
+boxpR= boxplot(respons ~ randomisering, data=data)
+
+Kvinner <- data[data$kjonn == 'Kvinne',]
+table(Kvinner$randomisering)
+
