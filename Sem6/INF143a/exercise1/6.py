@@ -1,0 +1,1 @@
+We can modify the historic ciphers so that they operate on sequences of bits by instead of using the 26 characters of the alphabet we can use combinations of 0 and 1.
