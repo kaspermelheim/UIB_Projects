@@ -1,7 +1,7 @@
 #4
 #README:
 """
-Task 4.2: Meet in the middle attack
+Meet in the middle attack
 Author: Kasper Melheim
 
 Explanation on how I solved this task:

@@ -211,7 +211,7 @@ def xor(plaintext, cipher):
         s += str(calc)
     return s
 
-#Reulst after L0 xor f
+#Result after L0 xor f
 Result = xor(L0, f)
 print(Result)
 

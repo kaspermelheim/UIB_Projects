@@ -116,4 +116,4 @@ def decrypt(c, k):
 print("Correct result for encrypting: " + str(encrypt(p,k) == c))
 
 #Decryption works for testdata - we decrypt the cipher with the key and obtain the given plaintext
-print("Correct result for decrypting: " + str(decrypt(c,k_end) == p))
+print("Correct result for decrypting: " + str(decrypt(c,k) == p))
